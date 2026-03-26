@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_routes_names.dart';
 import 'core/app_colors.dart';
-import 'core/utils/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,16 +16,14 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRouter.welcomeRoute);
+      Navigator.pushReplacementNamed(context, AppRouteNames.welcome);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
-
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -33,18 +31,19 @@ class _SplashScreenState extends State<SplashScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AppColors.lightBlue,   // Your first color
-              AppColors.primaryBlue,
+              AppColors.lightBlue,   // Your lighter blue
+              AppColors.primaryBlue, // Your brand blue
             ],
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
             Image.asset(
               'assets/images/logo.png',
               width: 120,
-              color: Colors.white
+              color: Colors.white,
             ),
 
             const SizedBox(height: 30),
@@ -60,6 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
 
             const SizedBox(height: 20),
+
 
             const Text(
               'Making diabetes care simple',

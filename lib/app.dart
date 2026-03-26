@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
-import 'core/utils/app_routes.dart';
+import 'core/utils/app_router.dart';
+import 'core/utils/app_routes_names.dart'; // Import names
 
 class DialensApp extends StatelessWidget {
   const DialensApp({super.key});
@@ -10,10 +11,8 @@ class DialensApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dialens',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme, // A basic theme for consistent fonts
-      // We start on the Splash route
-      initialRoute: AppRouter.splashRoute,
-      // The router handles how to navigate between screens
+      theme: AppTheme.lightTheme,
+      initialRoute: AppRouteNames.splash,
       onGenerateRoute: AppRouter.generateRoute,
     );
   }
