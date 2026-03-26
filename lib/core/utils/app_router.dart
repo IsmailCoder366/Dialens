@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/auth/screens/signup_screen.dart';
 import '../../splash.dart';
 import 'app_routes_names.dart';
 import '../../features/welcome/screens/welcome_screen.dart';
@@ -11,6 +12,9 @@ class AppRouter {
 
       case AppRouteNames.welcome:
         return MaterialPageRoute(builder: (_) => const WelcomeScreen());
+
+      case AppRouteNames.signup:
+        return MaterialPageRoute(builder: (_) => const SignupScreen());
 
       default:
         return MaterialPageRoute(
