@@ -1,3 +1,4 @@
+import 'package:dialens/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/widgets/custom_button.dart';
@@ -87,6 +88,7 @@ class _SignupScreenState extends State<SignupScreen> {
               color: Colors.white,
               label: 'Sign Up',
               onPressed: () {
+                Navigator.pushNamed(context, AppRouteNames.onboarding);
               },
             ),
 

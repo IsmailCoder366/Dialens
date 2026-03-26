@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app.dart';
+import 'features/onboarding/provider/onboarding_provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        Provider(create: (_) => Object()),
+        ChangeNotifierProvider(create: (_) => OnboardingProvider()),
       ],
       child: const DialensApp(),
     ),

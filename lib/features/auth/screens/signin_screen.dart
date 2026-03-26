@@ -22,7 +22,8 @@ class SigninScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            // Logo from Splash
+
+            /// Logo & Headers
             Image.asset('assets/images/logo.png', width: 50, color: AppColors.primaryBlue),
             const SizedBox(height: 24),
             const Text('Welcome Back', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
@@ -31,7 +32,7 @@ class SigninScreen extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // Form Fields
+            /// Form Fields
             const CustomTextField(label: 'Email', hintText: 'you@example.com'),
             const SizedBox(height: 20),
             const CustomTextField(
@@ -41,7 +42,7 @@ class SigninScreen extends StatelessWidget {
                 showSuffixIcon: true
             ),
 
-            // Forgot Password Link
+            /// Forgot Password
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
@@ -50,7 +51,7 @@ class SigninScreen extends StatelessWidget {
               ),
             ),
 
-            // "OR" Divider
+            /// "OR" Divider
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
@@ -65,13 +66,17 @@ class SigninScreen extends StatelessWidget {
               ),
             ),
 
-            // Social Buttons
+            /// Social Buttons
+
+            // google
             SocialButton(
               label: 'Continue with Google',
               assetPath: 'assets/images/google_logo.png', // Add this to assets
               onPressed: () {},
             ),
             const SizedBox(height: 12),
+
+            // apple
             SocialButton(
               label: 'Continue with Apple',
               assetPath: 'assets/images/apple_logo.png', // Add this to assets
@@ -80,7 +85,7 @@ class SigninScreen extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // Primary Sign In Button
+            /// Primary Sign In Button
             CustomButton(
               color: Colors.white,
               label: 'Sign In',
