@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'core/app_colors.dart';
 import 'core/utils/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -32,8 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF1754EA),
-              Color(0xFF193EBE),
+              AppColors.lightBlue,   // Your first color
+              AppColors.primaryBlue,
             ],
           ),
         ),
