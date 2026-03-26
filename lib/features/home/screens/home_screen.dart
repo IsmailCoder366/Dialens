@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/app_colors.dart';
 import '../widgets/home_action_button.dart';
 import '../widgets/recent_entry_tile.dart';
 import '../widgets/info_banner_card.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           // --- 2. THE BLUE HEADER SECTION ---
           Container(
-            padding: const EdgeInsets.only(top: 60, left: 24, right: 24, bottom: 32),
+            padding: const EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 32),
             decoration: const BoxDecoration(
               color: Color(0xFF155DFC),
               borderRadius: BorderRadius.only(
@@ -35,8 +36,11 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     HomeActionButton(icon: Icons.water_drop, label: "Glucose", color: Colors.redAccent, onTap: () {}),
+                    SizedBox(width: 3),
                     HomeActionButton(icon: Icons.restaurant, label: "Meal", color: Colors.orange, onTap: () {}),
+                    SizedBox(width: 3),
                     HomeActionButton(icon: Icons.medication, label: "Insulin", color: Colors.blueAccent, onTap: () {}),
+                    SizedBox(width: 3),
                     HomeActionButton(icon: Icons.bolt, label: "Activity", color: Colors.greenAccent, onTap: () {}),
                   ],
                 ),
@@ -101,7 +105,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // --- HELPER METHODS ---
+  /// --- HELPER METHODS ---
 
   Widget _buildTopBar() {
     return Row(
@@ -114,36 +118,54 @@ class HomeScreen extends StatelessWidget {
             Text("Sarah", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
           ],
         ),
-        const Icon(Icons.notifications_none, color: Colors.white, size: 28),
+        Row(
+          children: [
+           Image(image: AssetImage('assets/images/search_button.png'), width: 40, height: 40),
+            SizedBox(width: 10),
+            Image(image: AssetImage('assets/images/notification_button.png'), width: 40, height: 40)
+
+
+          ],
+        )
       ],
     );
   }
 
   Widget _buildLatestGlucoseCard() {
     return Container(
+      height: 116,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF10B981),
-        borderRadius: BorderRadius.circular(20),
+        color:  AppColors.lightgreen,
+          borderRadius: BorderRadius.circular(20),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               Text("Latest Glucose", style: TextStyle(color: Colors.white, fontSize: 16)),
-              SizedBox(height: 4),
-              Text("145 mg/dL", style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(20)),
+                child: const Text("15 mins ago", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(20)),
-            child: const Text("In Range", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("145 mg/dL", style: TextStyle(color: Colors.white, fontSize: 16)),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(20)),
+                child: const Text("In Range", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ],
           ),
         ],
-      ),
+      )
     );
   }
 

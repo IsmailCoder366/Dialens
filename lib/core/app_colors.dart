@@ -7,6 +7,8 @@ class AppColors {
 
   // Secondary Brand Color
   static const Color lightBlue = Color(0xFF2E7BFF);
+  static const Color lightgreen = Color(0xFF05DF72);
+  static const Color darkgreen = Color(0xFF00C950);
 
 
 }

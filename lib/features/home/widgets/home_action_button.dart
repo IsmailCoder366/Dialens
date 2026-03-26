@@ -21,19 +21,26 @@ class HomeActionButton extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            height: 82,
+            width: 89,
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              // Semi-transparent white to create the "glass" look on blue
               color: Colors.white.withOpacity(0.15),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(icon, color: color, size: 24),
+            child: Column(
+              children: [
+                Icon(icon, color: color, size: 24),
+                const SizedBox(height: 8),
+                Text(
+                  label,
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            style: const TextStyle(color: Colors.white, fontSize: 12),
-          ),
+
+
         ],
       ),
     );
