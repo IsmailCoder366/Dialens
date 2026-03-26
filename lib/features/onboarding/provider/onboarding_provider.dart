@@ -6,6 +6,12 @@ class OnboardingProvider extends ChangeNotifier {
   String glucoseUnit = 'mg/dL';
   String carbUnit = 'Grams';
   String? selectedDevice;
+  int lowTarget = 70;
+  int highTarget = 180;
+  String? primaryGoal;
+  bool notificationsEnabled = false;
+  bool bluetoothEnabled = false;
+  bool healthDataEnabled = false;
 
   int get currentStep => _currentStep;
   int get totalSteps => _totalSteps;
@@ -15,11 +21,23 @@ class OnboardingProvider extends ChangeNotifier {
   String? selectedDiabetesType;
   String? selectedManagementMethod;
 
-  void nextStep() {
+  void nextStep(BuildContext context) {
     if (_currentStep < _totalSteps) {
       _currentStep++;
       notifyListeners();
+    } else {
+      // Now 'context' is available to be passed here
+      _finishOnboarding(context);
     }
+  }
+
+  void _finishOnboarding(BuildContext context) {
+    // Navigate and remove all previous onboarding screens from the stack
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/home',
+          (route) => false,
+    );
   }
 
   void previousStep() {
@@ -52,5 +70,39 @@ class OnboardingProvider extends ChangeNotifier {
   void selectDevice(String device) {
     selectedDevice = device;
     notifyListeners();
+  }
+
+  void setLowTarget(int value) {
+    lowTarget = value;
+    notifyListeners();
+  }
+
+  void setHighTarget(int value) {
+    highTarget = value;
+    notifyListeners();
+  }
+
+  void selectPrimaryGoal(String goal) {
+    primaryGoal = goal;
+    notifyListeners();
+  }
+
+  void toggleNotifications(bool value) {
+    notificationsEnabled = value;
+    notifyListeners();
+  }
+
+  void toggleBluetooth(bool value) {
+    bluetoothEnabled = value;
+    notifyListeners();
+  }
+
+  void toggleHealthData(bool value) {
+    healthDataEnabled = value;
+    notifyListeners();
+  }
+
+  void completeOnboarding(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
   }
 }

@@ -1,10 +1,12 @@
+import 'package:dialens/features/onboarding/screens/onboarding_target_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/selection_chip.dart';
 import '../provider/onboarding_provider.dart';
-import 'onboarding_units_screen.dart'; // Import your next screen
+import 'onboarding_permissions_screen.dart';
+import 'onboarding_units_screen.dart';
 
 class OnboardingProfileScreen extends StatelessWidget {
   const OnboardingProfileScreen({super.key});
@@ -21,12 +23,11 @@ class OnboardingProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // --- 1. THE SHARED HEADER (Always visible) ---
+              // --- 1. THE SHARED HEADER ---
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Added a back button for Step 2 and beyond
                   if (provider.currentStep > 1)
                     IconButton(
                       padding: EdgeInsets.zero,
@@ -61,7 +62,19 @@ class OnboardingProfileScreen extends StatelessWidget {
               ),
 
               // --- 3. THE SHARED CONTINUE BUTTON ---
-              _buildFooterButton(provider),
+              _buildFooterButton(provider, context),
+
+              // --- 4. CONDITIONAL STEP 4 TEXT ---
+              if (provider.currentStep == 4) ...[
+                const SizedBox(height: 16),
+                const Center(
+                  child: Text(
+                    "You can change these settings anytime",
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                ),
+              ],
+
               const SizedBox(height: 24),
             ],
           ),
@@ -70,23 +83,21 @@ class OnboardingProfileScreen extends StatelessWidget {
     );
   }
 
-  // Logic to switch between step widgets
   Widget _buildStepContent(OnboardingProvider provider) {
     switch (provider.currentStep) {
       case 1:
         return _buildProfileStep(provider);
       case 2:
-        return const OnboardingUnitsScreen(); // This will show your second screen
+        return const OnboardingUnitsScreen();
       case 3:
-        return const Center(child: Text("Step 3: Target Ranges"));
+        return const OnboardingTargetsScreen();
       case 4:
-        return const Center(child: Text("Step 4: Reminders"));
+        return const OnboardingPermissionsScreen();
       default:
         return _buildProfileStep(provider);
     }
   }
 
-  // Your original Step 1 UI moved here for cleanliness
   Widget _buildProfileStep(OnboardingProvider provider) {
     return SingleChildScrollView(
       child: Column(
@@ -145,23 +156,24 @@ class OnboardingProfileScreen extends StatelessWidget {
     );
   }
 
-  // Logic for the button validation based on current step
-  Widget _buildFooterButton(OnboardingProvider provider) {
+  Widget _buildFooterButton(OnboardingProvider provider, BuildContext context) {
     bool canContinue = false;
 
     if (provider.currentStep == 1) {
       canContinue = provider.selectedDiabetesType != null && provider.selectedManagementMethod != null;
     } else if (provider.currentStep == 2) {
-      // Add validation for Step 2 if needed
       canContinue = provider.selectedDevice != null;
+    } else if (provider.currentStep == 3) {
+      // Assuming primary goal selection is required for Step 3
+      canContinue = provider.primaryGoal != null;
     } else {
       canContinue = true;
     }
 
     return CustomButton(
       color: canContinue ? AppColors.primaryBlue : Colors.grey[300]!,
-      label: 'Continue',
-      onPressed: canContinue ? () => provider.nextStep() : () {},
+      label: provider.currentStep == 4 ? 'Finish' : 'Continue',
+      onPressed: canContinue ? () => provider.nextStep(context) : () {},
     );
   }
 }
