@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/auth/screens/signin_screen.dart';
 import '../../features/auth/screens/signup_screen.dart';
 import '../../splash.dart';
 import 'app_routes_names.dart';
@@ -15,6 +16,9 @@ class AppRouter {
 
       case AppRouteNames.signup:
         return MaterialPageRoute(builder: (_) => const SignupScreen());
+
+      case AppRouteNames.login:
+        return MaterialPageRoute(builder: (_) => const SigninScreen());
 
       default:
         return MaterialPageRoute(
