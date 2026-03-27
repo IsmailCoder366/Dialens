@@ -74,6 +74,7 @@ class HomeScreen extends StatelessWidget {
           ),
 
           /// --- THE SCROLLABLE BODY SECTION ---
+
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
@@ -86,17 +87,12 @@ class HomeScreen extends StatelessWidget {
 
                   const SizedBox(height: 24),
 
-                  // REUSABLE PURPLE AI CARD
-                  const AIInsightCard(
-                    icon: Icons.insights,
-                    title: "AI Insight",
-                    content:
-                        "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g or adjusting insulin timing.",
-                    gradientColors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
-                    trailing: Icons.arrow_forward_ios
-                  ),
+                  ///  AI Insight Card
+                  buildAiInsightCard(),
 
                   const SizedBox(height: 32),
+
+                  /// Recall Section Header
                   _buildSectionHeader("Recent Entries", showViewAll: true),
                   const SizedBox(height: 16),
 
@@ -146,6 +142,18 @@ class HomeScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomNav(),
     );
+  }
+
+  /// AI Insight Card Widget
+  AIInsightCard buildAiInsightCard() {
+    return const AIInsightCard(
+                  icon: Icons.insights,
+                  title: "AI Insight",
+                  content:
+                      "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g or adjusting insulin timing.",
+                  gradientColors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                  trailing: Icons.arrow_forward_ios
+                );
   }
 
   /// Section Header Widget
@@ -336,7 +344,7 @@ class HomeScreen extends StatelessWidget {
         if (showViewAll)
           TextButton(
             onPressed: () {},
-            child: const Text("View All", style: TextStyle(color: Colors.blue)),
+            child: const Text("View All", style: TextStyle(color: AppColors.primaryBlue)),
           ),
         if (trailingIcon != null) ...[
           const SizedBox(width: 4),

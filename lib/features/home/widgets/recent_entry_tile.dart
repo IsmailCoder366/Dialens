@@ -1,3 +1,4 @@
+import 'package:dialens/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class RecentEntryTile extends StatelessWidget {
@@ -24,16 +25,24 @@ class RecentEntryTile extends StatelessWidget {
         children: [
           // The green glucose value box
           Container(
-            width: 50,
-            height: 50,
+            width: 60,
+            height: 60,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: const Color(0xFF10B981),
+              color:  AppColors.lightgreen,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Text(
-              value.split(' ')[0], // Extract only the number
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    value.split(' ')[0], // Extract only the number
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  Text('md/dL', style: TextStyle(color: Colors.white))
+                ],
+              ),
             ),
           ),
           const SizedBox(width: 16),
