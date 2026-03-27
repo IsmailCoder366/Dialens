@@ -44,7 +44,7 @@ class AIInsightCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w500, fontSize: 15),
+                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 15),
                 ),
                 const SizedBox(height: 6),
                 Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/app_colors.dart';
+import '../widgets/hb_a1c_card.dart';
 import '../widgets/home_action_button.dart';
 import '../widgets/recent_entry_tile.dart';
 import '../widgets/ai_insight_card.dart';
@@ -74,14 +75,12 @@ class HomeScreen extends StatelessWidget {
           ),
 
           /// --- THE SCROLLABLE BODY SECTION ---
-
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   /// Section Header
                   buildCard(),
 
@@ -115,16 +114,13 @@ class HomeScreen extends StatelessWidget {
 
                   const SizedBox(height: 24),
 
-                  /// REUSABLE BLUE HBA1C CARD
-                  AIInsightCard(
-                    title: "Estimated HbA1c",
-                    content:
-                        "6.8% ↓ 0.3%\nBased on 30-day average. Great progress!",
-                    gradientColors: [
-                      const Color(0xFFDBEAFE),
-                      const Color(0xFFBFDBFE),
-                    ],
-                    // trailing: _buildHbA1cIcon(),
+                  /// HBA1C CARD
+                  HbA1cCard(
+                    percentage: 6.8,
+                    decrease: 0.3,
+                    onTap: () {
+                      // Navigate to detailed HbA1c report
+                    },
                   ),
                 ],
               ),
@@ -147,13 +143,13 @@ class HomeScreen extends StatelessWidget {
   /// AI Insight Card Widget
   AIInsightCard buildAiInsightCard() {
     return const AIInsightCard(
-                  icon: Icons.insights,
-                  title: "AI Insight",
-                  content:
-                      "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g or adjusting insulin timing.",
-                  gradientColors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
-                  trailing: Icons.arrow_forward_ios
-                );
+      icon: Icons.insights,
+      title: "AI Insight",
+      content:
+          "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g or adjusting insulin timing.",
+      gradientColors: [Color(0xFFAD46FF), Color(0xFF4F39F6)],
+      trailing: Icons.arrow_forward_ios,
+    );
   }
 
   /// Section Header Widget
@@ -344,7 +340,10 @@ class HomeScreen extends StatelessWidget {
         if (showViewAll)
           TextButton(
             onPressed: () {},
-            child: const Text("View All", style: TextStyle(color: AppColors.primaryBlue)),
+            child: const Text(
+              "View All",
+              style: TextStyle(color: AppColors.primaryBlue),
+            ),
           ),
         if (trailingIcon != null) ...[
           const SizedBox(width: 4),
