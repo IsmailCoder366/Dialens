@@ -80,14 +80,9 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSectionHeader(
-                      trailingIcon: Icons.arrow_forward_ios,
-                      leadingIcon: Icons.summarize_outlined,
-                      "Today's Summary"),
-                  const SizedBox(height: 16),
 
-                  // REUSABLE SUMMARY STATS
-                  _buildSummaryStatsContainer(),
+                  /// Section Header
+                  buildCard(),
 
                   const SizedBox(height: 24),
 
@@ -139,6 +134,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+
       /// FAB for the center '+' button
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -147,6 +143,31 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomNav(),
+    );
+  }
+
+  /// Section Header Widget
+  Widget buildCard() {
+    return Card(
+      elevation: 1,
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            _buildSectionHeader(
+              trailingIcon: Icons.arrow_forward_ios,
+              leadingIcon: Icons.summarize_outlined,
+              "Today's Summary",
+            ),
+
+            const SizedBox(height: 16),
+
+            /// REUSABLE SUMMARY STATS
+            _buildSummaryStatsContainer(),
+          ],
+        ),
+      ),
     );
   }
 
@@ -262,12 +283,6 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSummaryStatsContainer() {
     return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey[100]!),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: const [
@@ -294,7 +309,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, {
+  Widget _buildSectionHeader(
+    String title, {
     bool showViewAll = false,
     IconData? leadingIcon,
     IconData? trailingIcon,
@@ -305,8 +321,8 @@ class HomeScreen extends StatelessWidget {
       children: [
         Row(
           children: [
-            if(leadingIcon != null) ...[
-              Icon(leadingIcon, size: 25, color: AppColors.primaryBlue)
+            if (leadingIcon != null) ...[
+              Icon(leadingIcon, size: 25, color: AppColors.primaryBlue),
             ],
             SizedBox(width: 8),
             Text(
