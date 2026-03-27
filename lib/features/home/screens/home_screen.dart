@@ -4,6 +4,7 @@ import '../widgets/hb_a1c_card.dart';
 import '../widgets/home_action_button.dart';
 import '../widgets/recent_entry_tile.dart';
 import '../widgets/ai_insight_card.dart';
+import '../widgets/reminder_card.dart';
 import '../widgets/summary_metrics.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -122,6 +123,18 @@ class HomeScreen extends StatelessWidget {
                       // Navigate to detailed HbA1c report
                     },
                   ),
+                  const SizedBox(height: 16),
+
+                  /// Reminder Card
+                  ReminderCard(
+                    title: "Dinner glucose check",
+                    time: "Today at 6:30 PM",
+                    onTap: () {
+                      // Handle reminder action
+                    },
+                  ),
+
+                  const SizedBox(height: 80),
                 ],
               ),
             ),
@@ -350,17 +363,6 @@ class HomeScreen extends StatelessWidget {
           Icon(trailingIcon, size: 16, color: AppColors.primaryBlue),
         ],
       ],
-    );
-  }
-
-  Widget _buildHbA1cIcon() {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: const BoxDecoration(
-        color: Color(0xFF155DFC),
-        shape: BoxShape.circle,
-      ),
-      child: const Icon(Icons.trending_up, color: Colors.white),
     );
   }
 
