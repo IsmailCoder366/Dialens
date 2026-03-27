@@ -80,7 +80,10 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSectionHeader("Today's Summary"),
+                  _buildSectionHeader(
+                      
+                      icon: Icons.summarize_outlined,
+                      "Today's Summary"),
                   const SizedBox(height: 16),
 
                   // REUSABLE SUMMARY STATS
@@ -291,13 +294,21 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, {bool showViewAll = false}) {
+  Widget _buildSectionHeader(String title, {bool showViewAll = false, IconData? icon}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Row(
+          children: [
+            if(icon != null) ...[
+              Icon(icon, size: 22, color: AppColors.primaryBlue)
+            ],
+            SizedBox(width: 5),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
         if (showViewAll)
           TextButton(
