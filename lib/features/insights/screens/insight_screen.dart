@@ -9,11 +9,43 @@ import '../widgets/meal_impact_chart.dart';
 import '../widgets/medication_insuline_module.dart';
 import '../widgets/time_in_range_donut.dart'; // Use your primaryBlue here
 
-class InsightsScreen extends StatelessWidget {
+class InsightsScreen extends StatefulWidget {
   const InsightsScreen({super.key});
 
   @override
+  State<InsightsScreen> createState() => _InsightsScreenState();
+}
+
+class _InsightsScreenState extends State<InsightsScreen> {
+  String _selectedPeriod = "Day";
+  Widget _buildTimeTab(String label) {
+    bool isSelected = _selectedPeriod == label;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedPeriod = label; // Updates the UI on click
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF155DFC) : const Color(0xFFF1F5F9),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.grey,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    bool isDay = _selectedPeriod == "Day";
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -33,10 +65,10 @@ class InsightsScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildTimeTab("Day", true),
-                  _buildTimeTab("Week", false),
-                  _buildTimeTab("Month", false),
-                  _buildTimeTab("3 Months", false),
+                  _buildTimeTab("Day"),
+                  _buildTimeTab("Week"),
+                  _buildTimeTab("Month"),
+                  _buildTimeTab("3 Months"),
                 ],
               ),
             ),
@@ -46,7 +78,7 @@ class InsightsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // 2. Health Score Card
-                  _buildHealthScoreCard(),
+                  _buildHealthScoreCard(isDay ? "82/100" : "85/100"),
                   const SizedBox(height: 16),
 
                   // 3. Share Button
@@ -159,18 +191,8 @@ class InsightsScreen extends StatelessWidget {
 
   // --- UI HELPER METHODS ---
 
-  Widget _buildTimeTab(String label, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFF155DFC) : const Color(0xFFF1F5F9),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(label, style: TextStyle(color: isSelected ? Colors.white : Colors.grey, fontWeight: FontWeight.bold)),
-    );
-  }
 
-  Widget _buildHealthScoreCard() {
+  Widget _buildHealthScoreCard(String scoreValue) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
