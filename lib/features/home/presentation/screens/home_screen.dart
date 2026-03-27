@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/app_colors.dart';
+import '../../../../core/app_colors.dart';
 import '../widgets/hb_a1c_card.dart';
 import '../widgets/home_action_button.dart';
 import '../widgets/recent_entry_tile.dart';
@@ -142,14 +142,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
 
-      /// FAB for the center '+' button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xFF155DFC),
-        child: const Icon(Icons.add, color: Colors.white, size: 30),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: _buildBottomNav(),
+
     );
   }
 
@@ -366,32 +359,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNav() {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.home, color: Color(0xFF155DFC)),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.bar_chart, color: Colors.grey),
-            onPressed: () {},
-          ),
-          const SizedBox(width: 40),
-          IconButton(
-            icon: const Icon(Icons.description, color: Colors.grey),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.person, color: Colors.grey),
-            onPressed: () {},
-          ),
-        ],
-      ),
-    );
-  }
 }

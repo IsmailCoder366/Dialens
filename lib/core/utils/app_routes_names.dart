@@ -7,6 +7,7 @@ class AppRouteNames {
 
   // Core App Features
   static const String onboarding = '/onboarding';
+  static const String mainWrapper = '/main-wrapper';
   static const String home = '/home';
   static const String insights = '/insights';
   static const String logSection = '/log-section';

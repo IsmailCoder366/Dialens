@@ -90,7 +90,7 @@ class SigninScreen extends StatelessWidget {
               color: Colors.white,
               label: 'Sign In',
               onPressed: () {
-                // Future Logic: Navigator.pushReplacementNamed(context, AppRouteNames.home);
+                Navigator.pushNamed(context, AppRouteNames.mainWrapper);
               },
             ),
 

@@ -35,7 +35,7 @@ class OnboardingProvider extends ChangeNotifier {
     // Navigate and remove all previous onboarding screens from the stack
     Navigator.pushNamedAndRemoveUntil(
       context,
-      '/home',
+      '/main-wrapper',
           (route) => false,
     );
   }

@@ -1,8 +1,9 @@
-import 'package:dialens/features/home/screens/home_screen.dart';
 import 'package:dialens/features/onboarding/screens/onboarding_profile_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/screens/signin_screen.dart';
 import '../../features/auth/screens/signup_screen.dart';
+import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/home/presentation/screens/main_wrapper.dart';
 import '../../splash.dart';
 import 'app_routes_names.dart';
 import '../../features/welcome/screens/welcome_screen.dart';
@@ -12,6 +13,9 @@ class AppRouter {
     switch (settings.name) {
       case AppRouteNames.splash:
         return MaterialPageRoute(builder: (_) => SplashScreen());
+
+      case AppRouteNames.mainWrapper:
+        return MaterialPageRoute(builder: (_) => const MainWrapper());
 
       case AppRouteNames.welcome:
         return MaterialPageRoute(builder: (_) => const WelcomeScreen());
