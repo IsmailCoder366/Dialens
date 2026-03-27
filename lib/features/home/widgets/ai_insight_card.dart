@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class InfoBannerCard extends StatelessWidget {
+class AIInsightCard extends StatelessWidget {
   final String title;
   final String content;
   final List<Color> gradientColors;
-  final Widget? trailing;
+  final IconData? trailing;
   final IconData? icon;
 
-  const InfoBannerCard({
+  const AIInsightCard({
     super.key,
     required this.title,
     required this.content,
@@ -30,8 +30,10 @@ class InfoBannerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Optional leading icon (like the bolt in AI Insight)
+
           if (icon != null) ...[
             Icon(icon, color: Colors.white.withOpacity(0.8), size: 24),
             const SizedBox(width: 12),
@@ -42,7 +44,7 @@ class InfoBannerCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w500, fontSize: 14),
+                  style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w500, fontSize: 15),
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -54,7 +56,7 @@ class InfoBannerCard extends StatelessWidget {
           ),
           if (trailing != null) ...[
             const SizedBox(width: 12),
-            trailing!,
+            Icon(trailing, color: Colors.white, size: 15)
           ],
         ],
       ),

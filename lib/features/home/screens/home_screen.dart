@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/app_colors.dart';
 import '../widgets/home_action_button.dart';
 import '../widgets/recent_entry_tile.dart';
-import '../widgets/info_banner_card.dart';
+import '../widgets/ai_insight_card.dart';
 import '../widgets/summary_metrics.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -87,11 +87,13 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // REUSABLE PURPLE AI CARD
-                  const InfoBannerCard(
+                  const AIInsightCard(
+                    icon: Icons.insights,
                     title: "AI Insight",
                     content:
-                        "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g.",
+                        "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g or adjusting insulin timing.",
                     gradientColors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                    trailing: Icons.arrow_forward_ios
                   ),
 
                   const SizedBox(height: 32),
@@ -118,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   /// REUSABLE BLUE HBA1C CARD
-                  InfoBannerCard(
+                  AIInsightCard(
                     title: "Estimated HbA1c",
                     content:
                         "6.8% ↓ 0.3%\nBased on 30-day average. Great progress!",
@@ -126,7 +128,7 @@ class HomeScreen extends StatelessWidget {
                       const Color(0xFFDBEAFE),
                       const Color(0xFFBFDBFE),
                     ],
-                    trailing: _buildHbA1cIcon(),
+                    // trailing: _buildHbA1cIcon(),
                   ),
                 ],
               ),
