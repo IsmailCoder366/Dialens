@@ -81,8 +81,8 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildSectionHeader(
-                      
-                      icon: Icons.summarize_outlined,
+                      trailingIcon: Icons.arrow_forward_ios,
+                      leadingIcon: Icons.summarize_outlined,
                       "Today's Summary"),
                   const SizedBox(height: 16),
 
@@ -294,16 +294,21 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, {bool showViewAll = false, IconData? icon}) {
+  Widget _buildSectionHeader(String title, {
+    bool showViewAll = false,
+    IconData? leadingIcon,
+    IconData? trailingIcon,
+    VoidCallback? onHeaderPressed,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            if(icon != null) ...[
-              Icon(icon, size: 22, color: AppColors.primaryBlue)
+            if(leadingIcon != null) ...[
+              Icon(leadingIcon, size: 25, color: AppColors.primaryBlue)
             ],
-            SizedBox(width: 5),
+            SizedBox(width: 8),
             Text(
               title,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -315,6 +320,10 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {},
             child: const Text("View All", style: TextStyle(color: Colors.blue)),
           ),
+        if (trailingIcon != null) ...[
+          const SizedBox(width: 4),
+          Icon(trailingIcon, size: 16, color: AppColors.primaryBlue),
+        ],
       ],
     );
   }
