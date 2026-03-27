@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HomeActionButton extends StatelessWidget {
-  final IconData icon;
+  final String images;
   final String label;
   final Color color;
   final VoidCallback onTap;
 
   const HomeActionButton({
     super.key,
-    required this.icon,
+    required this.images,
     required this.label,
     required this.color,
     required this.onTap,
@@ -30,7 +30,9 @@ class HomeActionButton extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Icon(icon, color: color, size: 24),
+                Expanded(
+                  child: Image(image: AssetImage(images))
+                ),
                 const SizedBox(height: 8),
                 Text(
                   label,

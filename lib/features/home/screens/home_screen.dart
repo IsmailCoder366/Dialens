@@ -14,9 +14,14 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // --- 2. THE BLUE HEADER SECTION ---
+          /// ---THE BLUE HEADER SECTION ---
           Container(
-            padding: const EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 32),
+            padding: const EdgeInsets.only(
+              top: 60,
+              left: 20,
+              right: 20,
+              bottom: 32,
+            ),
             decoration: const BoxDecoration(
               color: Color(0xFF155DFC),
               borderRadius: BorderRadius.only(
@@ -31,24 +36,44 @@ class HomeScreen extends StatelessWidget {
                 _buildLatestGlucoseCard(), // Green main card
                 const SizedBox(height: 24),
 
-                // REUSABLE ACTION BUTTONS
+                /// REUSABLE ACTION BUTTONS
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    HomeActionButton(icon: Icons.water_drop, label: "Glucose", color: Colors.redAccent, onTap: () {}),
+                    HomeActionButton(
+                      images: 'assets/images/Glucose.png',
+                      label: "Glucose",
+                      color: Colors.redAccent,
+                      onTap: () {},
+                    ),
                     SizedBox(width: 3),
-                    HomeActionButton(icon: Icons.restaurant, label: "Meal", color: Colors.orange, onTap: () {}),
+                    HomeActionButton(
+                      images: 'assets/images/Meal.png',
+                      label: "Meal",
+                      color: Colors.orange,
+                      onTap: () {},
+                    ),
                     SizedBox(width: 3),
-                    HomeActionButton(icon: Icons.medication, label: "Insulin", color: Colors.blueAccent, onTap: () {}),
+                    HomeActionButton(
+                      images: 'assets/images/Insulin.png',
+                      label: "Insulin",
+                      color: Colors.blueAccent,
+                      onTap: () {},
+                    ),
                     SizedBox(width: 3),
-                    HomeActionButton(icon: Icons.bolt, label: "Activity", color: Colors.greenAccent, onTap: () {}),
+                    HomeActionButton(
+                      images: 'assets/images/Activity.png',
+                      label: "Activity",
+                      color: Colors.greenAccent,
+                      onTap: () {},
+                    ),
                   ],
                 ),
               ],
             ),
           ),
 
-          // --- 3. THE SCROLLABLE BODY SECTION ---
+          /// --- THE SCROLLABLE BODY SECTION ---
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
@@ -66,7 +91,8 @@ class HomeScreen extends StatelessWidget {
                   // REUSABLE PURPLE AI CARD
                   const InfoBannerCard(
                     title: "AI Insight",
-                    content: "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g.",
+                    content:
+                        "Your post-lunch readings have been higher this week. Consider reducing carbs by 15g.",
                     gradientColors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
                   ),
 
@@ -74,18 +100,34 @@ class HomeScreen extends StatelessWidget {
                   _buildSectionHeader("Recent Entries", showViewAll: true),
                   const SizedBox(height: 16),
 
-                  // REUSABLE ENTRY TILES
-                  const RecentEntryTile(title: "Post-meal", time: "15 min ago", value: "145 mg/dL"),
-                  const RecentEntryTile(title: "Pre-meal", time: "2 hours ago", value: "98 mg/dL"),
-                  const RecentEntryTile(title: "Morning", time: "5 hours ago", value: "112 mg/dL"),
+                  /// REUSABLE ENTRY TILES
+                  const RecentEntryTile(
+                    title: "Post-meal",
+                    time: "15 min ago",
+                    value: "145 mg/dL",
+                  ),
+                  const RecentEntryTile(
+                    title: "Pre-meal",
+                    time: "2 hours ago",
+                    value: "98 mg/dL",
+                  ),
+                  const RecentEntryTile(
+                    title: "Morning",
+                    time: "5 hours ago",
+                    value: "112 mg/dL",
+                  ),
 
                   const SizedBox(height: 24),
 
-                  // REUSABLE BLUE HBA1C CARD
+                  /// REUSABLE BLUE HBA1C CARD
                   InfoBannerCard(
                     title: "Estimated HbA1c",
-                    content: "6.8% ↓ 0.3%\nBased on 30-day average. Great progress!",
-                    gradientColors: [const Color(0xFFDBEAFE), const Color(0xFFBFDBFE)],
+                    content:
+                        "6.8% ↓ 0.3%\nBased on 30-day average. Great progress!",
+                    gradientColors: [
+                      const Color(0xFFDBEAFE),
+                      const Color(0xFFBFDBFE),
+                    ],
                     trailing: _buildHbA1cIcon(),
                   ),
                 ],
@@ -94,7 +136,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      // FAB for the center '+' button
+      /// FAB for the center '+' button
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: const Color(0xFF155DFC),
@@ -114,19 +156,35 @@ class HomeScreen extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text("Good morning,", style: TextStyle(color: Colors.white70, fontSize: 14)),
-            Text("Sarah", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              "Good morning,",
+              style: TextStyle(color: Colors.white70, fontSize: 14),
+            ),
+            Text(
+              "Sarah",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
         Row(
           children: [
-           Image(image: AssetImage('assets/images/search_button.png'), width: 40, height: 40),
+            Image(
+              image: AssetImage('assets/images/search_button.png'),
+              width: 40,
+              height: 40,
+            ),
             SizedBox(width: 10),
-            Image(image: AssetImage('assets/images/notification_button.png'), width: 40, height: 40)
-
-
+            Image(
+              image: AssetImage('assets/images/notification_button.png'),
+              width: 40,
+              height: 40,
+            ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -136,19 +194,34 @@ class HomeScreen extends StatelessWidget {
       height: 116,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color:  AppColors.lightgreen,
-          borderRadius: BorderRadius.circular(20),
+        color: AppColors.lightgreen,
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Latest Glucose", style: TextStyle(color: Colors.white, fontSize: 16)),
+              Text(
+                "Latest Glucose",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(20)),
-                child: const Text("15 mins ago", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Text(
+                  "15 mins ago",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -156,16 +229,31 @@ class HomeScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("145 mg/dL", style: TextStyle(color: Colors.white, fontSize: 16)),
+              Text(
+                "145 mg/dL",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(20)),
-                child: const Text("In Range", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Text(
+                  "In Range",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
         ],
-      )
+      ),
     );
   }
 
@@ -180,9 +268,24 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: const [
-          SummaryMetric(label: "Average", value: "132", icon: Icons.trending_up, iconColor: Colors.blue),
-          SummaryMetric(label: "In Range", value: "68%", icon: Icons.center_focus_strong, iconColor: Colors.green),
-          SummaryMetric(label: "Entries", value: "8", icon: Icons.bolt, iconColor: Colors.purple),
+          SummaryMetric(
+            label: "Average",
+            value: "132",
+            icon: Icons.trending_up,
+            iconColor: Colors.blue,
+          ),
+          SummaryMetric(
+            label: "In Range",
+            value: "68%",
+            icon: Icons.center_focus_strong,
+            iconColor: Colors.green,
+          ),
+          SummaryMetric(
+            label: "Entries",
+            value: "8",
+            icon: Icons.bolt,
+            iconColor: Colors.purple,
+          ),
         ],
       ),
     );
@@ -192,9 +295,15 @@ class HomeScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         if (showViewAll)
-          TextButton(onPressed: () {}, child: const Text("View All", style: TextStyle(color: Colors.blue))),
+          TextButton(
+            onPressed: () {},
+            child: const Text("View All", style: TextStyle(color: Colors.blue)),
+          ),
       ],
     );
   }
@@ -202,7 +311,10 @@ class HomeScreen extends StatelessWidget {
   Widget _buildHbA1cIcon() {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: const BoxDecoration(color: Color(0xFF155DFC), shape: BoxShape.circle),
+      decoration: const BoxDecoration(
+        color: Color(0xFF155DFC),
+        shape: BoxShape.circle,
+      ),
       child: const Icon(Icons.trending_up, color: Colors.white),
     );
   }
@@ -214,11 +326,23 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          IconButton(icon: const Icon(Icons.home, color: Color(0xFF155DFC)), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.bar_chart, color: Colors.grey), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.home, color: Color(0xFF155DFC)),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.bar_chart, color: Colors.grey),
+            onPressed: () {},
+          ),
           const SizedBox(width: 40),
-          IconButton(icon: const Icon(Icons.description, color: Colors.grey), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.person, color: Colors.grey), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.description, color: Colors.grey),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.person, color: Colors.grey),
+            onPressed: () {},
+          ),
         ],
       ),
     );
