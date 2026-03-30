@@ -233,18 +233,38 @@ class ReportsScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(provider.selectedTemplate, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                  const Text("December 2-8, 2024", style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  // Logic: Uses the currently selected template name
+                  Text(
+                      provider.selectedTemplate,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
+                  ),
+                  // Logic: Uses the dynamic date range from provider
+                  Text(
+                      provider.reportDateRange,
+                      style: const TextStyle(color: Colors.grey, fontSize: 12)
+                  ),
                 ],
               ),
+              // Badge Logic
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(color: Colors.green.withOpacity(0.1), borderRadius: BorderRadius.circular(6)),
-                child: Text(provider.isDay ? "Daily" : "Weekly", style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 10)),
+                decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6)
+                ),
+                child: Text(
+                    provider.previewBadge, // Now shows Daily, Weekly, Monthly, etc.
+                    style: const TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10
+                    )
+                ),
               ),
             ],
           ),
           const SizedBox(height: 20),
+          // Keep your stats row as is (you can eventually make these dynamic too)
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -254,6 +274,7 @@ class ReportsScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
+          // Chart Area
           Container(
             height: 100,
             width: double.infinity,
@@ -262,7 +283,9 @@ class ReportsScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: const Color(0xFFF1F5F9)),
             ),
-            child: const Center(child: Icon(Icons.show_chart, color: Color(0xFF155DFC), size: 40)),
+            child: const Center(
+                child: Icon(Icons.show_chart, color: Color(0xFF155DFC), size: 40)
+            ),
           ),
         ],
       ),
