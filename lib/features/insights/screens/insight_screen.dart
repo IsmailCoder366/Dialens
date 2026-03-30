@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../provider/insight_provider.dart';
 import '../widgets/activity_impact_chart.dart';
 import '../widgets/daily_pattern_chart.dart';
 import '../widgets/glucose_area_chart.dart';
@@ -8,44 +9,17 @@ import '../widgets/low_glucose_module.dart';
 import '../widgets/meal_impact_chart.dart';
 import '../widgets/medication_insuline_module.dart';
 import '../widgets/time_in_range_donut.dart'; // Use your primaryBlue here
+import 'package:provider/provider.dart';
 
-class InsightsScreen extends StatefulWidget {
+class InsightsScreen extends StatelessWidget {
   const InsightsScreen({super.key});
 
   @override
-  State<InsightsScreen> createState() => _InsightsScreenState();
-}
-
-class _InsightsScreenState extends State<InsightsScreen> {
-  String _selectedPeriod = "Day";
-  Widget _buildTimeTab(String label) {
-    bool isSelected = _selectedPeriod == label;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedPeriod = label; // Updates the UI on click
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF155DFC) : const Color(0xFFF1F5F9),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.grey,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    bool isDay = _selectedPeriod == "Day";
+    // Access the provider logic
+    final provider = context.watch<InsightsProvider>();
+    final isDay = provider.isDay;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -53,8 +27,16 @@ class _InsightsScreenState extends State<InsightsScreen> {
         elevation: 0,
         centerTitle: true,
         leading: const Icon(Icons.arrow_back, color: Colors.white),
-        title: const Text("Insights", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        actions: [IconButton(icon: const Icon(Icons.file_download_outlined, color: Colors.white), onPressed: () {})],
+        title: const Text(
+          "Insights",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.file_download_outlined, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -65,10 +47,10 @@ class _InsightsScreenState extends State<InsightsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildTimeTab("Day"),
-                  _buildTimeTab("Week"),
-                  _buildTimeTab("Month"),
-                  _buildTimeTab("3 Months"),
+                  _buildTimeTab(context, "Day"),
+                  _buildTimeTab(context, "Week"),
+                  _buildTimeTab(context, "Month"),
+                  _buildTimeTab(context, "3 Months"),
                 ],
               ),
             ),
@@ -77,15 +59,17 @@ class _InsightsScreenState extends State<InsightsScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  // 2. Health Score Card
-                  _buildHealthScoreCard(isDay ? "82/100" : "85/100"),
+                  // 2. Health Score Card (Dynamic Score)
+                  _buildHealthScoreCard(
+                    provider.healthScore,
+                    provider.healthTrend,
+                  ),
                   const SizedBox(height: 16),
 
-                  // 3. Share Button
                   _buildShareButton(),
                   const SizedBox(height: 24),
 
-                  // 4. Accordion List - High Fidelity Injection
+                  // 4. Accordion List
                   _buildInsightTile(
                     Icons.analytics_outlined,
                     Colors.blue,
@@ -108,7 +92,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
                     Icons.favorite_border_rounded,
                     Colors.red,
                     "Glucose Variability",
-                    content: const GlucoseVariabilityModule(), // Added
+                    content: const GlucoseVariabilityModule(),
                   ),
                   _buildInsightTile(
                     Icons.restaurant_menu_outlined,
@@ -120,25 +104,28 @@ class _InsightsScreenState extends State<InsightsScreen> {
                     Icons.show_chart_rounded,
                     Colors.teal,
                     "Activity Impact",
-                    content: const ActivityImpactChart(), // Added
+                    content: const ActivityImpactChart(),
                   ),
                   _buildInsightTile(
                     Icons.error_outline_rounded,
                     Colors.redAccent,
                     "Low Glucose Events",
-                    content: const LowGlucoseModule(), // Added
+                    content: const LowGlucoseModule(),
                   ),
                   _buildInsightTile(
                     Icons.medication_outlined,
                     Colors.indigo,
                     "Medication & Insulin",
-                    content: const MedicationInsulinModule(), // Added
+                    content: const MedicationInsulinModule(),
                   ),
 
                   const SizedBox(height: 32),
 
-                  // 5. AI Recommendations Header
-                  _buildSectionHeader(Icons.auto_awesome, Colors.purple, "AI Recommendations"),
+                  _buildSectionHeader(
+                    Icons.auto_awesome,
+                    Colors.purple,
+                    "AI Recommendations",
+                  ),
                   const SizedBox(height: 16),
 
                   InsightActionCard(
@@ -146,7 +133,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
                     iconBgColor: const Color(0xFFEFF6FF),
                     iconColor: Colors.blue,
                     title: "Lighter Dinner Tonight",
-                    description: "Your dinner spike was high today. Try reducing carbs by 20g for better overnight control.",
+                    description:
+                        "Your dinner spike was high today. Try reducing carbs by 20g for better overnight control.",
                     actionText: "View Low-Carb Ideas",
                     onTap: () {},
                   ),
@@ -155,7 +143,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
                     iconBgColor: const Color(0xFFF0FDF4),
                     iconColor: Colors.green,
                     title: "Evening Walk",
-                    description: "A 10-minute walk after dinner could lower tonight's spike by 15-20 mg/dL.",
+                    description:
+                        "A 10-minute walk after dinner could lower tonight's spike by 15-20 mg/dL.",
                     actionText: "Set Reminder",
                     onTap: () {},
                   ),
@@ -164,20 +153,51 @@ class _InsightsScreenState extends State<InsightsScreen> {
                     iconBgColor: const Color(0xFFFFF7ED),
                     iconColor: Colors.orange,
                     title: "Check Before Bed",
-                    description: "You had a low this morning. Check glucose before bed to prevent overnight lows.",
+                    description:
+                        "You had a low this morning. Check glucose before bed to prevent overnight lows.",
                     actionText: "Set Alert",
                     onTap: () {},
                   ),
 
                   const SizedBox(height: 32),
 
-                  // 6. Today Summary
-                  _buildSectionHeader(Icons.access_time, Colors.grey, "Today Summary"),
+                  // 6. Summary Header (Dynamic Header & Logs)
+                  _buildSectionHeader(
+                    Icons.access_time,
+                    Colors.grey,
+                    provider
+                        .summaryHeader, // Matches "Today Summary", "Weekly Summary", etc.
+                  ),
                   const SizedBox(height: 16),
-                  _buildSummaryLogTile(Icons.water_drop, Colors.blue, "Glucose Logs", "8 readings today", true),
-                  _buildSummaryLogTile(Icons.restaurant, Colors.green, "Meal Logs", "3 meals logged", true),
-                  _buildSummaryLogTile(Icons.link, Colors.purple, "Insulin Doses", "5 doses recorded", true),
-                  _buildSummaryLogTile(Icons.bolt, Colors.orange, "Activity Sessions", "1 workouts logged", false, status: "Fair"),
+                  _buildSummaryLogTile(
+                    Icons.water_drop,
+                    Colors.blue,
+                    "Glucose Logs",
+                    provider.glucoseSummary,
+                    true,
+                  ),
+                  _buildSummaryLogTile(
+                    Icons.restaurant,
+                    Colors.green,
+                    "Meal Logs",
+                    provider.mealsSummary,
+                    true,
+                  ),
+                  _buildSummaryLogTile(
+                    Icons.link,
+                    Colors.purple,
+                    "Insulin Doses",
+                    provider.insulinSummary,
+                    true,
+                  ),
+                  _buildSummaryLogTile(
+                    Icons.bolt,
+                    Colors.orange,
+                    "Activity Sessions",
+                    provider.activitySummary,
+                    false,
+                    status: provider.activityStatus,
+                  ),
 
                   const SizedBox(height: 50),
                 ],
@@ -189,128 +209,212 @@ class _InsightsScreenState extends State<InsightsScreen> {
     );
   }
 
-  // --- UI HELPER METHODS ---
+  // UPDATED Tab Helper to use Provider
+  Widget _buildTimeTab(BuildContext context, String label) {
+    final provider = context.read<InsightsProvider>();
+    bool isSelected = provider.selectedPeriod == label;
 
-
-  Widget _buildHealthScoreCard(String scoreValue) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: const Color(0xFF155DFC),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.check_circle_outline, color: Colors.white, size: 18),
-              SizedBox(width: 8),
-              Text("Overall Health Score", style: TextStyle(color: Colors.white70, fontSize: 13)),
-            ],
+    return GestureDetector(
+      onTap: () => provider.setPeriod(label),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF155DFC) : const Color(0xFFF1F5F9),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.grey,
+            fontWeight: FontWeight.bold,
           ),
-          const SizedBox(height: 12),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text("82/100", style: TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold)),
-              const SizedBox(width: 12),
-              Icon(Icons.trending_up, color: Colors.greenAccent.shade100, size: 18),
-              Text("+2 today", style: TextStyle(color: Colors.greenAccent.shade100, fontSize: 14)),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const Text("Good progress! A few improvements can boost your score.", style: TextStyle(color: Colors.white, fontSize: 14)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildShareButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton.icon(
-        onPressed: () {},
-        icon: const Icon(Icons.share_outlined, size: 18),
-        label: const Text("Share"),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF155DFC),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(vertical: 12),
         ),
       ),
     );
   }
+}
 
-  Widget _buildInsightTile(IconData icon, Color color, String title, {Widget? content}) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade100),
-      ),
-      child: ExpansionTile(
-        // This removes the default lines that appear when tile expands
-        shape: const RoundedRectangleBorder(side: BorderSide.none),
-        collapsedShape: const RoundedRectangleBorder(side: BorderSide.none),
-        leading: Icon(icon, color: color),
-        title: Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-        children: [
-          if (content != null)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              child: content,
-            ),
-        ],
-      ),
-    );
-  }
+// --- UI HELPER METHODS ---
 
-  Widget _buildSectionHeader(IconData icon, Color color, String title) {
-    return Row(
+Widget _buildHealthScoreCard(String scoreValue, String trendValue) {
+  return Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      color: const Color(0xFF155DFC),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, color: color, size: 22),
-        const SizedBox(width: 8),
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+        const Row(
+          children: [
+            Icon(Icons.check_circle_outline, color: Colors.white, size: 18),
+            const SizedBox(width: 8),
+            Text(
+              "Overall Health Score",
+              style: TextStyle(color: Colors.white70, fontSize: 13),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            // Wrap the score in Flexible so it doesn't push the trend off-screen
+            Flexible(
+              child: Text(
+                scoreValue,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis, // Prevents overflow if score is long
+              ),
+            ),
+            const SizedBox(width: 12),
+            const Icon(Icons.trending_up, color: Color(0xFFB9F6CA), size: 18),
+            const SizedBox(width: 4),
+            Text(
+              trendValue, // Now dynamic
+              style: const TextStyle(color: Color(0xFFB9F6CA), fontSize: 14),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        const Text(
+          "Good progress! A few improvements can boost your score.",
+          style: TextStyle(color: Colors.white, fontSize: 14),
+        ),
       ],
-    );
-  }
+    ),
+  );
+}
 
-  Widget _buildSummaryLogTile(IconData icon, Color color, String title, String subtitle, bool isDone, {String? status}) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade100),
+Widget _buildShareButton() {
+  return SizedBox(
+    width: double.infinity,
+    child: ElevatedButton.icon(
+      onPressed: () {},
+      icon: const Icon(Icons.share_outlined, size: 18),
+      label: const Text("Share"),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF155DFC),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: const EdgeInsets.symmetric(vertical: 12),
       ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-            child: Icon(icon, color: color, size: 20),
+    ),
+  );
+}
+
+Widget _buildInsightTile(
+  IconData icon,
+  Color color,
+  String title, {
+  Widget? content,
+}) {
+  return Container(
+    margin: const EdgeInsets.only(bottom: 12),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: Colors.grey.shade100),
+    ),
+    child: ExpansionTile(
+      // This removes the default lines that appear when tile expands
+      shape: const RoundedRectangleBorder(side: BorderSide.none),
+      collapsedShape: const RoundedRectangleBorder(side: BorderSide.none),
+      leading: Icon(icon, color: color),
+      title: Text(
+        title,
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+      ),
+      children: [
+        if (content != null)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: content,
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                Text(subtitle, style: const TextStyle(color: Colors.grey, fontSize: 12)),
-              ],
+      ],
+    ),
+  );
+}
+
+Widget _buildSectionHeader(IconData icon, Color color, String title) {
+  return Row(
+    children: [
+      Icon(icon, color: color, size: 22),
+      const SizedBox(width: 8),
+      Text(
+        title,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF1E293B),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _buildSummaryLogTile(
+  IconData icon,
+  Color color,
+  String title,
+  String subtitle,
+  bool isDone, {
+  String? status,
+}) {
+  return Container(
+    margin: const EdgeInsets.only(bottom: 12),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: const Color(0xFFF8FAFC),
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: Colors.grey.shade100),
+    ),
+    child: Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(icon, color: color, size: 20),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: const TextStyle(color: Colors.grey, fontSize: 12),
+              ),
+            ],
+          ),
+        ),
+        if (isDone)
+          const Icon(Icons.check_circle, color: Colors.green, size: 24)
+        else if (status != null)
+          Text(
+            status,
+            style: const TextStyle(
+              color: Colors.orange,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          if (isDone)
-            const Icon(Icons.check_circle, color: Colors.green, size: 24)
-          else if (status != null)
-            Text(status, style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-        ],
-      ),
-    );
-  }
+      ],
+    ),
+  );
 }

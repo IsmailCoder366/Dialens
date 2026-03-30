@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'core/utils/app_router.dart';
 import 'core/utils/app_routes_names.dart';
+import 'features/insights/provider/insight_provider.dart';
 import 'features/onboarding/provider/onboarding_provider.dart';
 
 void main() {
@@ -10,6 +11,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
+        ChangeNotifierProvider(create: (_) => InsightsProvider()),
       ],
       // MyApp is the child, which contains the MaterialApp
       child: const DialensApp(),
