@@ -58,7 +58,7 @@ class ReportsScreen extends StatelessWidget {
 
 
             /// ---Report Header---
-            _buildHeader("Report Templates", true, actionText: 'Popular'),
+            _buildHeader("Report Templates", showPopularBadge: true),
             const SizedBox(height: 16),
 
 
@@ -105,14 +105,14 @@ class ReportsScreen extends StatelessWidget {
 
 
             /// ---Preview Section---
-            _buildHeader("Report Preview", false),
+            _buildHeader("Report Preview", actionText: "Today"),
             const SizedBox(height: 16),
 
-            // --- NEW: Report Preview Card ---
+            /// ---Report Preview Card ---
             _buildReportPreview(provider),
 
             const SizedBox(height: 30),
-            _buildHeader("Quick Actions", false),
+            _buildHeader("Quick Actions"),
             const SizedBox(height: 16),
             const Row(
               children: [
@@ -131,7 +131,7 @@ class ReportsScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 30),
-            _buildHeader("Recent Reports", false, actionText: "View All"),
+            _buildHeader("Recent Reports", actionText: "View All", onActionTap: () {}),
             const SizedBox(height: 16),
             _buildRecentTile("Weekly Report", "Dec 2-8, 2024", Colors.blue),
             _buildRecentTile("Monthly Report", "November 2024", Colors.purple),
@@ -150,29 +150,37 @@ class ReportsScreen extends StatelessWidget {
 
   /// --- UI HELPER METHODS ---
 
-  Widget _buildHeader(String title, bool hasStar, {String? actionText}) {
+  Widget _buildHeader(
+      String title, {
+        bool showPopularBadge = false, // For the "Popular" star badge
+        String? actionText,            // For "Today", "View All", etc.
+        VoidCallback? onActionTap,
+      }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Section Title
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF1E293B),
+        // 1. Title (Left Side)
+        Flexible(
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1E293B),
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
 
-        // The Badge/Button Section
-        if (hasStar)
-        // This builds the "Popular" badge from Container (1).png
+        // 2. Right Side Logic
+        if (showPopularBadge)
+        // Styled Badge for "Report Templates" section
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFE2E8F0)), // Light border
+              border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: const Row(
               mainAxisSize: MainAxisSize.min,
@@ -183,22 +191,24 @@ class ReportsScreen extends StatelessWidget {
                   "Popular",
                   style: TextStyle(
                     color: Color(0xFF1E293B),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
             ),
           )
         else if (actionText != null)
-        // This builds the "View All" link from Reports.jpg
-          TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(padding: EdgeInsets.zero),
+        // Plain text for "Report Preview" (Today) or "Recent Reports" (View All)
+          GestureDetector(
+            onTap: onActionTap,
             child: Text(
               actionText,
-              style: const TextStyle(
-                color: Color(0xFF155DFC), // Your primary blue
+              style: TextStyle(
+                // Change color based on whether it's a link (View All) or label (Today)
+                color: actionText == "Today"
+                    ? Colors.grey.shade500
+                    : const Color(0xFF155DFC),
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
               ),
@@ -207,7 +217,6 @@ class ReportsScreen extends StatelessWidget {
       ],
     );
   }
-
   Widget _buildReportPreview(ReportsProvider provider) {
     return Container(
       padding: const EdgeInsets.all(16),
