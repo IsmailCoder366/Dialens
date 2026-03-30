@@ -4,6 +4,7 @@ import 'core/utils/app_router.dart';
 import 'core/utils/app_routes_names.dart';
 import 'features/insights/provider/insight_provider.dart';
 import 'features/onboarding/provider/onboarding_provider.dart';
+import 'features/reports/provider/reports_provider.dart';
 
 void main() {
   runApp(
@@ -12,6 +13,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => InsightsProvider()),
+        ChangeNotifierProvider(create: (_) => ReportsProvider()),
       ],
       // MyApp is the child, which contains the MaterialApp
       child: const DialensApp(),

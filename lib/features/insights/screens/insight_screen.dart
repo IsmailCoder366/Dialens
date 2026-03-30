@@ -8,7 +8,7 @@ import '../widgets/insight_action_card.dart';
 import '../widgets/low_glucose_module.dart';
 import '../widgets/meal_impact_chart.dart';
 import '../widgets/medication_insuline_module.dart';
-import '../widgets/time_in_range_donut.dart'; // Use your primaryBlue here
+import '../widgets/time_in_range_donut.dart';
 import 'package:provider/provider.dart';
 
 class InsightsScreen extends StatelessWidget {
@@ -16,9 +16,8 @@ class InsightsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Access the provider logic
+
     final provider = context.watch<InsightsProvider>();
-    final isDay = provider.isDay;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -209,32 +208,33 @@ class InsightsScreen extends StatelessWidget {
     );
   }
 
-  // UPDATED Tab Helper to use Provider
-  Widget _buildTimeTab(BuildContext context, String label) {
-    final provider = context.read<InsightsProvider>();
-    bool isSelected = provider.selectedPeriod == label;
 
-    return GestureDetector(
-      onTap: () => provider.setPeriod(label),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF155DFC) : const Color(0xFFF1F5F9),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.grey,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
 }
 
-// --- UI HELPER METHODS ---
+/// ---UI HELPER METHODS---
+///
+Widget _buildTimeTab(BuildContext context, String label) {
+  final provider = context.read<InsightsProvider>();
+  bool isSelected = provider.selectedPeriod == label;
+
+  return GestureDetector(
+    onTap: () => provider.setPeriod(label),
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: isSelected ? const Color(0xFF155DFC) : const Color(0xFFF1F5F9),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: isSelected ? Colors.white : Colors.grey,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  );
+}
 
 Widget _buildHealthScoreCard(String scoreValue, String trendValue) {
   return Container(

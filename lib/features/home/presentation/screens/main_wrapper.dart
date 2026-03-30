@@ -1,4 +1,5 @@
 import 'package:dialens/core/app_colors.dart';
+import 'package:dialens/features/reports/reports_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../insights/screens/insight_screen.dart';
 import 'home_screen.dart';
@@ -17,7 +18,7 @@ class _MainWrapperState extends State<MainWrapper> {
   final List<Widget> _pages = [
     const HomeScreen(), // Your existing Home UI
     const InsightsScreen(),
-    const Center(child: Text("Reports Page")),
+    const ReportsScreen(),
     const Center(child: Text("Profile Page")),
   ];
 
