@@ -1,7 +1,7 @@
 import 'package:dialens/core/app_colors.dart';
-import 'package:dialens/features/reports/reports_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../insights/screens/insight_screen.dart';
+import '../../../reports/screen/reports_screen.dart';
 import 'home_screen.dart';
 
 class MainWrapper extends StatefulWidget {
