@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/app_colors.dart';
 import '../provider/reports_provider.dart';
 import '../widgets/action_button.dart';
 import '../widgets/report_template_card.dart';
@@ -17,7 +18,7 @@ class ReportsScreen extends StatelessWidget {
         backgroundColor: const Color(0xFF155DFC),
         elevation: 0,
         leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () {}),
-        title: const Text("Reports", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: const Text("Reports", style: TextStyle(color: Colors.white)),
         centerTitle: true,
         actions: [
           IconButton(icon: const Icon(Icons.share_outlined, color: Colors.white), onPressed: () {}),
@@ -26,14 +27,15 @@ class ReportsScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Create and share professional health reports",
-                style: TextStyle(color: Colors.blueGrey, fontSize: 14)),
+            const Text("Create and share professional health reports", style: TextStyle(color: AppColors.primaryBlue, fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
 
-            // 1. Time Tabs
+
+            ///  ---Time Tabs---
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: ["Day", "Week", "Month", "3 Months"].map((label) {
@@ -52,11 +54,15 @@ class ReportsScreen extends StatelessWidget {
                 );
               }).toList(),
             ),
-
             const SizedBox(height: 30),
-            _buildHeader("Report Templates", true),
+
+
+            /// ---Report Header---
+            _buildHeader("Report Templates", true, actionText: 'Popular'),
             const SizedBox(height: 16),
 
+
+            /// ---Report Section---
             ReportTemplateCard(
               title: "Quick Summary",
               subtitle: "Essential metrics for daily review",
@@ -80,8 +86,8 @@ class ReportsScreen extends StatelessWidget {
             ReportTemplateCard(
               title: "Clinical Report",
               subtitle: "Detailed medical data for healthcare providers",
-              pages: "6 pages",         // Added
-              sections: "4 sections",   // Added
+              pages: "6 pages",
+              sections: "4 sections",
               icon: Icons.medical_services_outlined,
               isSelected: provider.selectedTemplate == "Clinical Report",
               onTap: () => provider.setTemplate("Clinical Report"),
@@ -89,13 +95,16 @@ class ReportsScreen extends StatelessWidget {
             ReportTemplateCard(
               title: "Pattern Analysis",
               subtitle: "Focus on daily patterns and trends",
-              pages: "3 pages",         // Added
-              sections: "3 sections",   // Added
+              pages: "3 pages",
+              sections: "3 sections",
               icon: Icons.analytics,
               isSelected: provider.selectedTemplate == "Pattern Analysis",
               onTap: () => provider.setTemplate("Pattern Analysis"),
             ),
             const SizedBox(height: 30),
+
+
+            /// ---Preview Section---
             _buildHeader("Report Preview", false),
             const SizedBox(height: 16),
 
@@ -139,20 +148,62 @@ class ReportsScreen extends StatelessWidget {
     );
   }
 
-  // --- UI HELPER METHODS ---
+  /// --- UI HELPER METHODS ---
 
   Widget _buildHeader(String title, bool hasStar, {String? actionText}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
-            if (hasStar) const Padding(padding: EdgeInsets.only(left: 6), child: Icon(Icons.star, color: Colors.orange, size: 16)),
-          ],
+        // Section Title
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF1E293B),
+          ),
         ),
-        if (actionText != null)
-          Text(actionText, style: const TextStyle(color: Color(0xFF155DFC), fontWeight: FontWeight.bold, fontSize: 14)),
+
+        // The Badge/Button Section
+        if (hasStar)
+        // This builds the "Popular" badge from Container (1).png
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: const Color(0xFFE2E8F0)), // Light border
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.star, color: Colors.orange, size: 14),
+                SizedBox(width: 4),
+                Text(
+                  "Popular",
+                  style: TextStyle(
+                    color: Color(0xFF1E293B),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          )
+        else if (actionText != null)
+        // This builds the "View All" link from Reports.jpg
+          TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(padding: EdgeInsets.zero),
+            child: Text(
+              actionText,
+              style: const TextStyle(
+                color: Color(0xFF155DFC), // Your primary blue
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -278,7 +329,6 @@ class ReportsScreen extends StatelessWidget {
   }
 }
 
-// Internal component for the Stats Row
 class _PreviewStat extends StatelessWidget {
   final String label;
   final String value;
@@ -296,6 +346,4 @@ class _PreviewStat extends StatelessWidget {
         Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: valueColor ?? const Color(0xFF1E293B))),
         Text(unit, style: const TextStyle(color: Colors.grey, fontSize: 10)),
       ],
-    );
-  }
-}
+    );}}
