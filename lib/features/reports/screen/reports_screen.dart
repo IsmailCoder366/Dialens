@@ -7,6 +7,7 @@ import '../widgets/export_format_dialog.dart';
 import '../widgets/glucose_graph.dart';
 import '../widgets/metric_card.dart';
 import '../widgets/quick_action_button.dart';
+import '../widgets/report_card.dart';
 import '../widgets/report_template_card.dart';
 import '../widgets/share_report_dialog.dart';
 
@@ -175,15 +176,13 @@ class ReportsScreen extends StatelessWidget {
               ],
             ),
 
+            /// Recent Report tiles
             const SizedBox(height: 30),
-            _buildHeader("Recent Reports", actionText: "View All", onActionTap: () {}),
-            const SizedBox(height: 16),
-            _buildRecentTile("Weekly Report", "Dec 2-8, 2024", Colors.blue),
-            _buildRecentTile("Monthly Report", "November 2024", Colors.purple),
+            _buildRecentReportsSection(),
 
             const SizedBox(height: 30),
 
-            // --- NEW: Schedule Recurring Reports Card ---
+
             _buildScheduleCard(),
 
             const SizedBox(height: 40),
@@ -427,28 +426,60 @@ class ReportsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRecentTile(String title, String date, Color iconColor) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
-      ),
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        leading: CircleAvatar(
-          backgroundColor: iconColor.withOpacity(0.1),
-          child: Icon(Icons.picture_as_pdf, color: iconColor, size: 20),
-        ),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-        subtitle: Text(date, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+  Widget _buildRecentReportsSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          // Section Header
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Recent Reports",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              TextButton(
+                onPressed: () {},
+                child: const Text("View All", style: TextStyle(color: Color(0xFF155DFC))),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Report List
+          const ReportCard(
+            title: "Weekly Report",
+            date: "Dec 2-8, 2024",
+            type: "Comprehensive",
+            pageCount: 4,
+            fileSize: "2.4 MB",
+            timeAgo: "2 days ago",
+            isShared: true,
+            sharedWith: ["Dr. Smith", "Family"],
+          ),
+
+          const ReportCard(
+            title: "Monthly Report",
+            date: "November 2024",
+            type: "Clinical",
+            pageCount: 6,
+            fileSize: "3.8 MB",
+            timeAgo: "1 week ago",
+            isShared: true,
+            sharedWith: ["Dr. Smith"],
+          ),
+
+          const ReportCard(
+            title: "Weekly Report",
+            date: "Nov 25 - Dec 1, 2024",
+            type: "Quick Summary",
+            pageCount: 1,
+            fileSize: "0.8 MB",
+            timeAgo: "2 weeks ago",
+          ),
+        ],
       ),
     );
-  }
-}
+  }}
 
 class _RangeRow extends StatelessWidget {
   final String label;
