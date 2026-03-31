@@ -7,6 +7,7 @@ import '../widgets/glucose_graph.dart';
 import '../widgets/metric_card.dart';
 import '../widgets/quick_action_button.dart';
 import '../widgets/report_template_card.dart';
+import '../widgets/share_report_dialog.dart';
 
 class ReportsScreen extends StatelessWidget {
   const ReportsScreen({super.key});
@@ -135,7 +136,15 @@ class ReportsScreen extends StatelessWidget {
                   label: "Share with the Family",
                   iconColor: const Color(0xFF00A63E), // Orange
                   iconBgColor: const Color(0xFFFFF7ED), // Soft Orange
-                  onTap: () => print("Print Pressed"),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) {
+                        return const ShareReportDialog();
+                      },
+                    );
+                  },
                 ),
               ],
             ),
