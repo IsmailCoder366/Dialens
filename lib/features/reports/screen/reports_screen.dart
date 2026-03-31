@@ -9,6 +9,7 @@ import '../widgets/metric_card.dart';
 import '../widgets/quick_action_button.dart';
 import '../widgets/report_card.dart';
 import '../widgets/report_template_card.dart';
+import '../widgets/schedule_dialog.dart';
 import '../widgets/share_report_dialog.dart';
 
 class ReportsScreen extends StatelessWidget {
@@ -111,8 +112,9 @@ class ReportsScreen extends StatelessWidget {
 
             /// ---Report Preview Card ---
             _buildReportPreview(provider),
-
             const SizedBox(height: 30),
+
+            /// Quick Action Section
             _buildHeader("Quick Actions"),
             const SizedBox(height: 16),
             Row(
@@ -169,22 +171,21 @@ class ReportsScreen extends StatelessWidget {
                 QuickActionButton(
                   icon: Icons.print_outlined,
                   label: "Print Report",
-                  iconColor: const Color(0xFFEA580C), // Orange
-                  iconBgColor: const Color(0xFFFFF7ED), // Soft Orange
+                  iconColor: const Color(0xFFEA580C),
+                  iconBgColor: const Color(0xFFFFF7ED),
                   onTap: () => print("Print Pressed"),
                 ),
               ],
             ),
 
+
             /// Recent Report tiles
             const SizedBox(height: 30),
             _buildRecentReportsSection(),
-
             const SizedBox(height: 30),
 
-
-            _buildScheduleCard(),
-
+            /// Schedule Section
+            _buildScheduleCard(context),
             const SizedBox(height: 40),
           ],
         ),
@@ -380,23 +381,29 @@ class ReportsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildScheduleCard() {
+  Widget _buildScheduleCard(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFFEFF6FF),
+        color: const Color(0xFFEFF6FF), // Light blue background
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.calendar_today_outlined, color: Color(0xFF155DFC), size: 20),
-              SizedBox(width: 10),
-              Expanded(
+              // Calendar Icon with specific Blue from UI
+              const Icon(Icons.calendar_today_outlined, color: Color(0xFF155DFC), size: 20),
+              const SizedBox(width: 10),
+              const Expanded(
                 child: Text(
                   "Schedule Recurring Reports",
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1E293B),
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],
@@ -404,21 +411,38 @@ class ReportsScreen extends StatelessWidget {
           const SizedBox(height: 8),
           const Text(
             "Automatically generate and email reports to your healthcare team every week or month.",
-            style: TextStyle(color: Colors.blueGrey, fontSize: 13),
+            style: TextStyle(
+              color: Color(0xFF64748B), // Slate grey for better readability
+              fontSize: 13,
+              height: 1.4,
+            ),
           ),
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // Triggering the pixel-perfect dialog
+                showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) {
+                    return const ScheduleReportsDialog();
+                  },
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: const Color(0xFF155DFC),
                 elevation: 0,
-                side: const BorderSide(color: Color(0xFF155DFC)),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                side: const BorderSide(color: Color(0xFF155DFC), width: 1.5),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              child: const Text("Set Up Schedule"),
+              child: const Text(
+                "Set Up Schedule",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
             ),
           ),
         ],
