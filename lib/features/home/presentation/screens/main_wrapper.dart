@@ -1,6 +1,7 @@
 import 'package:dialens/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../../../insights/screens/insight_screen.dart';
+import '../../../profile/screens/more_screens.dart';
 import '../../../reports/screen/reports_screen.dart';
 import 'home_screen.dart';
 
@@ -19,7 +20,7 @@ class _MainWrapperState extends State<MainWrapper> {
     const HomeScreen(), // Your existing Home UI
     const InsightsScreen(),
     const ReportsScreen(),
-    const Center(child: Text("Profile Page")),
+    const MoreScreen()
   ];
 
   @override
