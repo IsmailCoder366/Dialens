@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/menu_tile.dart';
 import '../widgets/profile_card.dart';
+import 'account_and_settings.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -56,7 +56,15 @@ class MoreScreen extends StatelessWidget {
                   iconBgColor: const Color(0xFFEFF6FF),
                   title: "Account & Settings",
                   subtitle: "Manage your profile and preferences",
-                  onTap: () {},
+                  onTap: () {
+                    // Standard Navigation to the new screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AccountSettingsScreen(),
+                      ),
+                    );
+                  },
                 ),
                 MenuTile(
                   icon: Icons.trending_up,
