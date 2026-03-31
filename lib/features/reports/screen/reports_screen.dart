@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../core/app_colors.dart';
 import '../provider/reports_provider.dart';
 import '../widgets/email_doctor_dialog.dart';
+import '../widgets/export_format_dialog.dart';
 import '../widgets/glucose_graph.dart';
 import '../widgets/metric_card.dart';
 import '../widgets/quick_action_button.dart';
@@ -156,7 +157,12 @@ class ReportsScreen extends StatelessWidget {
                   label: "Download PDF",
                   iconColor: const Color(0xFF9333EA), // Purple
                   iconBgColor: const Color(0xFFF5F3FF), // Soft Purple
-                  onTap: () => print("Download Pressed"),
+                  onTap: () => {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const ExportFormatDialog(),
+                    )
+                },
                 ),
                 const SizedBox(width: 12),
                 QuickActionButton(
