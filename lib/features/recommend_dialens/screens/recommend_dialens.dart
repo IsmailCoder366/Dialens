@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/community_card.dart';
 import '../widgets/flutter_info_card.dart';
 import '../widgets/recommend_app_bar.dart';
 import '../widgets/referral_card.dart';
@@ -73,7 +74,7 @@ class RecommendScreen extends StatelessWidget {
 
 
 
-            // --- SHARE VIA SECTION ---
+            /// --- SHARE SECTION ---
             const Align(
               alignment: Alignment.centerLeft,
               child: Text("Share via", style: TextStyle(color: Color(0xFF64748B), fontWeight: FontWeight.bold)),
@@ -81,9 +82,26 @@ class RecommendScreen extends StatelessWidget {
             const SizedBox(height: 12),
             _buildShareOptions(),
 
+            /// --- HOW IT WORK ---
             const SizedBox(height: 32),
             _buildHowItWorks(),
             const SizedBox(height: 40),
+
+            Text('Referral rewards are subject to terms and conditions.'),
+            Center(child: Text('View Full Terms', style: TextStyle(color: Color(0xffE60076), fontSize: 16))),
+
+            Column(
+              children: [
+                // ... rest of recommend screen ...
+
+                // THE COMMUNITY CARD
+                CommunityCard(
+                  onTap: () {
+                    // Handle Join Community or link to social/forum
+                  },
+                ),
+              ],
+            )
           ],
         ),
       ),
