@@ -18,4 +18,5 @@ class AppRouteNames {
   static const String challenges = '/challenges';
   static const String user_manual = '/user manual';
   static const String recommend_dialens = '/recommend dialens';
+  static const String support = '/support feedback';
 }

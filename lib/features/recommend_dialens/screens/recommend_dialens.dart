@@ -19,9 +19,12 @@ class RecommendScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             /// --- HEADER SECTION ---
             _buildGiftHeader(),
             const SizedBox(height: 24),
+
+            /// --- WHY SHARE DIALENS ---
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -81,15 +84,17 @@ class RecommendScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             _buildShareOptions(),
+            const SizedBox(height: 32),
+
 
             /// --- HOW IT WORK ---
-            const SizedBox(height: 32),
             _buildHowItWorks(),
             const SizedBox(height: 40),
 
             Text('Referral rewards are subject to terms and conditions.'),
             Center(child: Text('View Full Terms', style: TextStyle(color: Color(0xffE60076), fontSize: 16))),
 
+            /// --- COMMUNITY SECTION ---
             Column(
               children: [
                 // ... rest of recommend screen ...

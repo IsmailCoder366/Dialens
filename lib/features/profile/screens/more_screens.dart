@@ -2,7 +2,6 @@ import 'package:dialens/core/utils/app_routes_names.dart';
 import 'package:flutter/material.dart';
 import '../widgets/menu_tile.dart';
 import '../widgets/profile_card.dart';
-import 'account_and_settings.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -115,7 +114,9 @@ class MoreScreen extends StatelessWidget {
                   iconBgColor: const Color(0xFFEEF2FF),
                   title: "Support & Feedback",
                   subtitle: "Get help or share your thoughts",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRouteNames.support);
+                  },
                 ),
 
                 const SizedBox(height: 24),
