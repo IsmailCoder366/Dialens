@@ -1,6 +1,7 @@
 import 'package:dialens/features/challenges/screens/challenge_screen.dart';
 import 'package:dialens/features/onboarding/screens/onboarding_profile_screen.dart';
 import 'package:dialens/features/profile/screens/account_and_settings.dart';
+import 'package:dialens/features/user_manual/screens/user_manual_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/screens/signin_screen.dart';
 import '../../features/auth/screens/signup_screen.dart';
@@ -39,6 +40,9 @@ class AppRouter {
 
       case AppRouteNames.challenges:
         return MaterialPageRoute(builder: (_) => const ChallengesScreen());
+
+      case AppRouteNames.user_manual:
+        return MaterialPageRoute(builder: (_) => const UserManualScreen());
 
       default:
         return MaterialPageRoute(

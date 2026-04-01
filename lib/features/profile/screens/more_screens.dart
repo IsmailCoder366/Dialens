@@ -95,7 +95,9 @@ class MoreScreen extends StatelessWidget {
                   iconBgColor: const Color(0xFFF5F3FF),
                   title: "User Manual",
                   subtitle: "Learn how to use Dialens",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRouteNames.user_manual);
+                  },
                 ),
                 MenuTile(
                   icon: Icons.favorite_border,

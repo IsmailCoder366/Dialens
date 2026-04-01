@@ -14,6 +14,7 @@ class ChallengesScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+
             ///  --- XP SUMMARY HEADER ---
             Container(
               margin: const EdgeInsets.all(20),
@@ -51,6 +52,8 @@ class ChallengesScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+
+                  /// --- Available Challenges ---
                   const Text("Available challenges", style: TextStyle(color: Color(0xFF364153), fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
 
@@ -78,7 +81,7 @@ class ChallengesScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
-
+                  /// --- Unavailable Challenges ---
                   const Text("Unavailable challenges", style: TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
 
@@ -104,7 +107,7 @@ class ChallengesScreen extends StatelessWidget {
                     icon: Icon(Icons.monetization_on_outlined, color: Color(0xFF94A3B8)),
                   ),
 
-                  // --- UPGRADE BANNER ---
+                  /// --- UPGRADE BANNER ---
                   Container(
                     margin: const EdgeInsets.only(top: 20, bottom: 40),
                     padding: const EdgeInsets.all(24),
