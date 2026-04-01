@@ -31,7 +31,7 @@ class StatsScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 20),
-            // --- TOP HEADER BLOCK ---
+            /// --- TOP HEADER BLOCK ---
             Container(
               width: 380,
               height: 60,
@@ -65,14 +65,17 @@ class StatsScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
                   const SizedBox(height: 20),
 
-                  // --- CENTRAL FLOATING ICON ---
+                  /// --- CENTRAL FLOATING ICON ---
                   Container(
                     height: 80,
                     width: 80,
                     decoration: BoxDecoration(
                       color: Color(0xff00A23D),
                       shape: BoxShape.circle,
-                      boxShadow: [BoxShadow(color: Color(0xff00A23D).withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 5))],
+                      gradient: LinearGradient(colors: [
+                        Color(0xff05DF72),
+                        Color(0xff00A63E),
+                      ])
                     ),
                     child: const Icon(Icons.bar_chart, color: Colors.white, size: 40),
                   ),
