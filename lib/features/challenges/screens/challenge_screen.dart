@@ -49,20 +49,19 @@ class ChallengesScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("Available challenges", style: TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
+                  const Text("Available challenges", style: TextStyle(color: Color(0xFF364153), fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
 
                   const ChallengeCard(
                     title: "Snack's Check",
-                    description: "Measure post-meal BGs 3 times a day to complete this challenge.",
+                    description: "Measuring your blood sugar after a meal is important. Are your BGs in range? Measure post-meal BGs 3 times a day to complete this challenge.",
                     xp: "+10 XP",
                     progress: 0.66,
                     progressText: "2/3",
                     icon: Icon(Icons.fastfood_outlined, color: Color(0xFFB45309)),
                   ),
-
                   ChallengeCard(
                     title: "Big Blue Test",
                     description: "Log blood sugar before and after 15-20 minutes of exercise.",
@@ -70,17 +69,39 @@ class ChallengesScreen extends StatelessWidget {
                     icon: const Icon(Icons.directions_run, color: Color(0xFFB45309)),
                     onTap: () {},
                   ),
-
+                  ChallengeCard(
+                    title: "Go Pro",
+                    description: "Tame your monster 7-days in a row and you'll gain mySugr PRO. No cash, no payment, no stress, no worry. Just 7-day streak!",
+                    xp: "7-Day PRO Trail",
+                    icon: const Icon(Icons.sentiment_dissatisfied, color: Color(0xFFB45309)),
+                    onTap: () {},
+                  ),
                   const SizedBox(height: 24),
+
+
                   const Text("Unavailable challenges", style: TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
 
                   const ChallengeCard(
                     title: "Vampire",
-                    description: "Log your data three times a day for three consecutive days.",
+                    description: "You've won the Rookie challenge, now it's all about blood. Heaps of blood! Suck your own sweet, red juice before a vampire does it for you.",
                     xp: "+25 XP",
                     isLocked: true,
                     icon: Icon(Icons.face_retouching_natural, color: Color(0xFF94A3B8)),
+                  ),
+                  const ChallengeCard(
+                    title: "Sweat it",
+                    description: "Are you up for some action? No sweat without sweat! So, put on your sports duds and get your sweat glands going! Log sports activities 5 times.",
+                    xp: "+25 XP",
+                    isLocked: true,
+                    icon: Icon(Icons.foggy, color: Color(0xFF94A3B8)),
+                  ),
+                  const ChallengeCard(
+                    title: "Your monster",
+                    description: "Want your own, cute hairy little monster? You'll build your own cool little monster if you maintain a streak for 7 days.",
+                    xp: "+25 XP",
+                    isLocked: true,
+                    icon: Icon(Icons.monetization_on_outlined, color: Color(0xFF94A3B8)),
                   ),
 
                   // --- UPGRADE BANNER ---

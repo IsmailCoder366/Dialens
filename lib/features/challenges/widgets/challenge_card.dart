@@ -57,7 +57,7 @@ class ChallengeCard extends StatelessWidget {
                         Text(title, style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
-                            color: isLocked ? const Color(0xFF94A3B8) : const Color(0xFF065F46)
+                            color: Color(0xff008236)
                         )),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -101,10 +101,11 @@ class ChallengeCard extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onTap,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF059669),
+                  minimumSize: Size(350, 60),
+                  backgroundColor: const Color(0xFF00A63E),
                   foregroundColor: Colors.white,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
                 child: const Text("Start Challenge"),
               ),
