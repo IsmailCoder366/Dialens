@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/action_card.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/state_grid_card.dart';
 
@@ -8,57 +9,51 @@ class StatsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color greenTheme = Color(0xFF10B981);
+    
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: greenTheme,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text("Stats", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        centerTitle: true,
+      appBar: CustomGradientAppBar(
+        gradientColors: [
+          Color(0xff00A63E),
+          Color(0xff008236),
+        ],
+        title: "Stats",
+        height: 140, // Set your custom height here
         actions: [
-          IconButton(icon: const Icon(Icons.tune, color: Colors.white), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.tune, color: Colors.white),
+            onPressed: () {},
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 20),
             // --- TOP HEADER BLOCK ---
             Container(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-              decoration: const BoxDecoration(
-                color: greenTheme,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
+              width: 380,
+              height: 60,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              decoration:  BoxDecoration(
+                color: Color(0xff00A23D),
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: ActionCard(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(color: Color(0xFFF0FDF4), shape: BoxShape.circle),
-                      child: const Icon(Icons.show_chart, color: greenTheme),
-                    ),
-                    const SizedBox(width: 12),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Selected range", style: TextStyle(color: Color(0xFF64748B), fontSize: 12)),
-                        Text("Weekly Stats", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                      ],
-                    ),
-                    const Spacer(),
-                    const Icon(Icons.chevron_right, color: Color(0xFF94A3B8)),
-                  ],
-                ),
+              child: Row(
+                children: [
+                  const Icon(Icons.show_chart, color: Colors.white),
+                  const SizedBox(width: 12),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Selected range", style: TextStyle(color: Colors.white, fontSize: 12)),
+                      Text("Weekly Stats", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white)),
+                    ],
+                  ),
+                  const Spacer(),
+                  const Icon(Icons.chevron_right, color: Colors.white),
+                ],
               ),
             ),
 
@@ -75,9 +70,9 @@ class StatsScreen extends StatelessWidget {
                     height: 80,
                     width: 80,
                     decoration: BoxDecoration(
-                      color: greenTheme,
+                      color: Color(0xff00A23D),
                       shape: BoxShape.circle,
-                      boxShadow: [BoxShadow(color: greenTheme.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 5))],
+                      boxShadow: [BoxShadow(color: Color(0xff00A23D).withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 5))],
                     ),
                     child: const Icon(Icons.bar_chart, color: Colors.white, size: 40),
                   ),
