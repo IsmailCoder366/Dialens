@@ -1,4 +1,6 @@
 import 'package:dialens/features/onboarding/screens/onboarding_profile_screen.dart';
+import 'package:dialens/features/profile/screens/account_and_settings.dart';
+import 'package:dialens/features/profile/screens/state_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/screens/signin_screen.dart';
 import '../../features/auth/screens/signup_screen.dart';
@@ -29,8 +31,11 @@ class AppRouter {
       case AppRouteNames.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingProfileScreen());
 
-      case AppRouteNames.home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case AppRouteNames.account_settings:
+        return MaterialPageRoute(builder: (_) => const AccountSettingsScreen());
+
+      case AppRouteNames.stat:
+        return MaterialPageRoute(builder: (_) => const StatsScreen());
 
       default:
         return MaterialPageRoute(

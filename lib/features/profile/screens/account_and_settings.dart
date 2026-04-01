@@ -1,8 +1,7 @@
 import 'package:dialens/features/profile/screens/tabs/account_tab.dart';
+import 'package:dialens/features/profile/screens/tabs/settings_tab.dart';
 import 'package:dialens/features/profile/screens/tabs/therapy_tab.dart';
 import 'package:flutter/material.dart';
-import '../widgets/action_card.dart';
-import '../widgets/primary_button.dart';
 
 class AccountSettingsScreen extends StatefulWidget {
   const AccountSettingsScreen({super.key});
@@ -42,7 +41,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> with Sing
               children: [
                 const AccountTab(),
                 const TherapyTab(),
-                _buildSettingsTab(),
+                const SettingsTab()
               ],
             ),
           ),
@@ -53,35 +52,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> with Sing
 
 
 
-  // --- TAB 3: SETTINGS ---
-  Widget _buildSettingsTab() {
-    return ListView(
-      padding: const EdgeInsets.all(20),
-      children: [
-        _buildPlaceholderSection("Settings Content Section", Icons.settings_suggest_outlined),
-      ],
-    );
-  }
-
-
-  // --- HELPERS ---
-
-  Widget _buildPlaceholderSection(String text, IconData icon) {
-    return ActionCard(
-      child: Container(
-        height: 300,
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 48, color: const Color(0xFFCBD5E1)),
-            const SizedBox(height: 16),
-            Text(text, style: const TextStyle(color: Color(0xFF94A3B8))),
-          ],
-        ),
-      ),
-    );
-  }
+  /// HELPERS
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(

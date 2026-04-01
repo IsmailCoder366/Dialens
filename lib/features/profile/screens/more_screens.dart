@@ -1,3 +1,4 @@
+import 'package:dialens/core/utils/app_routes_names.dart';
 import 'package:flutter/material.dart';
 import '../widgets/menu_tile.dart';
 import '../widgets/profile_card.dart';
@@ -58,12 +59,7 @@ class MoreScreen extends StatelessWidget {
                   subtitle: "Manage your profile and preferences",
                   onTap: () {
                     // Standard Navigation to the new screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AccountSettingsScreen(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, AppRouteNames.account_settings);
                   },
                 ),
                 MenuTile(
@@ -72,7 +68,9 @@ class MoreScreen extends StatelessWidget {
                   iconBgColor: const Color(0xFFF0FDF4),
                   title: "Stats",
                   subtitle: "View your health statistics",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRouteNames.stat);
+                  },
                 ),
                 MenuTile(
                   icon: Icons.emoji_events_outlined,
