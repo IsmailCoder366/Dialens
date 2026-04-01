@@ -105,7 +105,9 @@ class MoreScreen extends StatelessWidget {
                   iconBgColor: const Color(0xFFFDF2F8),
                   title: "Recommend Dialens",
                   subtitle: "Share with friends and family",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRouteNames.recommend_dialens);
+                  },
                 ),
                 MenuTile(
                   icon: Icons.chat_bubble_outline,

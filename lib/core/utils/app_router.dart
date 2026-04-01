@@ -1,6 +1,7 @@
 import 'package:dialens/features/challenges/screens/challenge_screen.dart';
 import 'package:dialens/features/onboarding/screens/onboarding_profile_screen.dart';
 import 'package:dialens/features/profile/screens/account_and_settings.dart';
+import 'package:dialens/features/recommend_dialens/screens/recommend_dialens.dart';
 import 'package:dialens/features/user_manual/screens/user_manual_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/screens/signin_screen.dart';
@@ -43,6 +44,9 @@ class AppRouter {
 
       case AppRouteNames.user_manual:
         return MaterialPageRoute(builder: (_) => const UserManualScreen());
+
+      case AppRouteNames.recommend_dialens:
+        return MaterialPageRoute(builder: (_) => const RecommendScreen());
 
       default:
         return MaterialPageRoute(
