@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/action_card.dart';
+import '../../../stat/widgets/action_card.dart';
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({super.key});

@@ -15,4 +15,5 @@ class AppRouteNames {
   static const String more = '/more';
   static const String account_settings = '/account settings';
   static const String stat = '/stat';
+  static const String challenges = '/challenges';
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../widgets/action_card.dart';
-import '../../widgets/primary_button.dart';
+import '../../../stat/widgets/action_card.dart';
+import '../../../../core/widgets/primary_button.dart';
 
 class AccountTab extends StatelessWidget {
   const AccountTab({super.key});

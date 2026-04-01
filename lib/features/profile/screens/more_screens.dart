@@ -78,7 +78,9 @@ class MoreScreen extends StatelessWidget {
                   iconBgColor: const Color(0xFFFFFBEB),
                   title: "Challenges",
                   subtitle: "Complete goals and earn rewards",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRouteNames.challenges);
+                  },
                 ),
 
                 const Padding(
