@@ -19,4 +19,6 @@ class AppRouteNames {
   static const String user_manual = '/user manual';
   static const String recommend_dialens = '/recommend dialens';
   static const String support = '/support feedback';
+  static const String log_hub = '/log hub';
+  static const String new_entry = '/new entry';
 }

@@ -1,4 +1,6 @@
 import 'package:dialens/features/challenges/screens/challenge_screen.dart';
+import 'package:dialens/features/log_hub/screens/log_hub_screen.dart';
+import 'package:dialens/features/new_entry/screens/new_entry_screen.dart';
 import 'package:dialens/features/onboarding/screens/onboarding_profile_screen.dart';
 import 'package:dialens/features/profile/screens/account_and_settings.dart';
 import 'package:dialens/features/recommend_dialens/screens/recommend_dialens.dart';
@@ -51,6 +53,12 @@ class AppRouter {
 
       case AppRouteNames.support:
         return MaterialPageRoute(builder: (_) => const SupportFeedbackScreen());
+
+      case AppRouteNames.log_hub:
+        return MaterialPageRoute(builder: (_) => const LogHubScreen());
+
+      case AppRouteNames.new_entry:
+        return MaterialPageRoute(builder: (_) => const NewEntryScreen());
 
       default:
         return MaterialPageRoute(

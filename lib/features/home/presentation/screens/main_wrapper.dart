@@ -1,4 +1,5 @@
 import 'package:dialens/core/app_colors.dart';
+import 'package:dialens/core/utils/app_routes_names.dart';
 import 'package:flutter/material.dart';
 import '../../../insights/screens/insight_screen.dart';
 import '../../../profile/screens/more_screens.dart';
@@ -34,7 +35,9 @@ class _MainWrapperState extends State<MainWrapper> {
 
       /// The Floating '+' Button
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddEntrySheet(context),
+        onPressed: () {
+          Navigator.pushNamed(context, AppRouteNames.log_hub);
+        },
         backgroundColor:  AppColors.primaryBlue,
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white, size: 30),
@@ -86,20 +89,6 @@ class _MainWrapperState extends State<MainWrapper> {
             ),
           )
         ],
-      ),
-    );
-  }
-
-  void _showAddEntrySheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(20),
-        height: 200,
-        child: const Center(child: Text("Add New Entry Options Here")),
       ),
     );
   }

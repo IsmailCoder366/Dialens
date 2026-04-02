@@ -11,7 +11,7 @@ class SupportFeedbackScreen extends StatefulWidget {
 }
 
 class _SupportFeedbackScreenState extends State<SupportFeedbackScreen> {
-  int _selectedCategory = 0; // 0: Bug, 1: Request, 2: Feedback, 3: Compliment
+  int _selectedCategory = 0;
 
   @override
   Widget build(BuildContext context) {
