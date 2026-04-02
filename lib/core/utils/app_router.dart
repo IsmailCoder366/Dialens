@@ -10,6 +10,7 @@ import 'package:dialens/features/recommend_dialens/screens/recommend_dialens.dar
 import 'package:dialens/features/support/screens/support_screen.dart';
 import 'package:dialens/features/user_manual/screens/user_manual_screen.dart';
 import 'package:flutter/material.dart';
+import '../../features/activity_log/screens/activity_log_screen.dart';
 import '../../features/auth/screens/signin_screen.dart';
 import '../../features/auth/screens/signup_screen.dart';
 import '../../features/home/presentation/screens/main_wrapper.dart';
@@ -71,6 +72,9 @@ class AppRouter {
 
       case AppRouteNames.insulin_log:
         return MaterialPageRoute(builder: (_) => const InsulinLogScreen());
+
+      case AppRouteNames.activity_log:
+        return MaterialPageRoute(builder: (_) => const ActivityLogScreen());
 
       default:
         return MaterialPageRoute(

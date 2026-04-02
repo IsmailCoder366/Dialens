@@ -57,7 +57,9 @@ class LogHubScreen extends StatelessWidget {
                   Navigator.pushNamed(context, AppRouteNames.insulin_log);
                 }),
                 const SizedBox(width: 16),
-                LogEntryCard(icon: Icons.show_chart, title: "Activity", subtitle: "Track exercise", baseColor: Colors.green, onTap: () {}),
+                LogEntryCard(icon: Icons.show_chart, title: "Activity", subtitle: "Track exercise", baseColor: Colors.green, onTap: () {
+                  Navigator.pushNamed(context, AppRouteNames.activity_log);
+                }),
               ],
             ),
 
