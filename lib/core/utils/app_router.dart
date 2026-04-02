@@ -4,6 +4,7 @@ import 'package:dialens/features/glucose_log_screen/screen/blood_glucose_log_scr
 import 'package:dialens/features/insuline_log/screens/insuline_log_screen.dart';
 import 'package:dialens/features/log_hub/screens/log_hub_screen.dart';
 import 'package:dialens/features/new_entry/screens/new_entry_screen.dart';
+import 'package:dialens/features/notification/screens/notification_panel.dart';
 import 'package:dialens/features/onboarding/screens/onboarding_profile_screen.dart';
 import 'package:dialens/features/profile/screens/account_and_settings.dart';
 import 'package:dialens/features/recommend_dialens/screens/recommend_dialens.dart';
@@ -39,6 +40,9 @@ class AppRouter {
 
       case AppRouteNames.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingProfileScreen());
+
+      case AppRouteNames.notification_panel:
+        return MaterialPageRoute(builder: (_) => const NotificationsPanel());
 
       case AppRouteNames.account_settings:
         return MaterialPageRoute(builder: (_) => const AccountSettingsScreen());

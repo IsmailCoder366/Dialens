@@ -25,4 +25,5 @@ class AppRouteNames {
   static const String carbs_log = '/carbs log';
   static const String insulin_log = '/insulin log';
   static const String activity_log = '/activity log';
+  static const String notification_panel = '/notification panel';
 }

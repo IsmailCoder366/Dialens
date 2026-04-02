@@ -1,3 +1,4 @@
+import 'package:dialens/core/utils/app_routes_names.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/app_colors.dart';
 import '../widgets/hb_a1c_card.dart';
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _buildTopBar(),
+                _buildTopBar(context),
                 const SizedBox(height: 24),
                 _buildLatestGlucoseCard(), // Green main card
                 const SizedBox(height: 24),
@@ -46,28 +47,36 @@ class HomeScreen extends StatelessWidget {
                       images: 'assets/images/Glucose.png',
                       label: "Glucose",
                       color: Colors.redAccent,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRouteNames.glucose_log);
+                      },
                     ),
                     SizedBox(width: 3),
                     HomeActionButton(
                       images: 'assets/images/Meal.png',
                       label: "Meal",
                       color: Colors.orange,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRouteNames.carbs_log);
+                      },
                     ),
                     SizedBox(width: 3),
                     HomeActionButton(
                       images: 'assets/images/Insulin.png',
                       label: "Insulin",
                       color: Colors.blueAccent,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRouteNames.insulin_log);
+                      },
                     ),
                     SizedBox(width: 3),
                     HomeActionButton(
                       images: 'assets/images/Activity.png',
                       label: "Activity",
                       color: Colors.greenAccent,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRouteNames.activity_log);
+                      },
                     ),
                   ],
                 ),
@@ -185,7 +194,7 @@ class HomeScreen extends StatelessWidget {
 
   /// --- HELPER METHODS ---
 
-  Widget _buildTopBar() {
+  Widget _buildTopBar(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -214,10 +223,15 @@ class HomeScreen extends StatelessWidget {
               height: 40,
             ),
             SizedBox(width: 10),
-            Image(
-              image: AssetImage('assets/images/notification_button.png'),
-              width: 40,
-              height: 40,
+            GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, AppRouteNames.notification_panel);
+              },
+              child: Image(
+                image: AssetImage('assets/images/notification_button.png'),
+                width: 40,
+                height: 40,
+              ),
             ),
           ],
         ),
