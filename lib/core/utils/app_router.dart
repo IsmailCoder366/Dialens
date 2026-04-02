@@ -1,4 +1,7 @@
+import 'package:dialens/features/carbs_log/screens/carbs_log_screen.dart';
 import 'package:dialens/features/challenges/screens/challenge_screen.dart';
+import 'package:dialens/features/glucose_log_screen/screen/blood_glucose_log_screen.dart';
+import 'package:dialens/features/insuline_log/screens/insuline_log_screen.dart';
 import 'package:dialens/features/log_hub/screens/log_hub_screen.dart';
 import 'package:dialens/features/new_entry/screens/new_entry_screen.dart';
 import 'package:dialens/features/onboarding/screens/onboarding_profile_screen.dart';
@@ -59,6 +62,15 @@ class AppRouter {
 
       case AppRouteNames.new_entry:
         return MaterialPageRoute(builder: (_) => const NewEntryScreen());
+
+      case AppRouteNames.glucose_log:
+        return MaterialPageRoute(builder: (_) => const BloodGlucoseLogScreen());
+
+      case AppRouteNames.carbs_log:
+        return MaterialPageRoute(builder: (_) => const CarbsLogScreen());
+
+      case AppRouteNames.insulin_log:
+        return MaterialPageRoute(builder: (_) => const InsulinLogScreen());
 
       default:
         return MaterialPageRoute(

@@ -41,15 +41,21 @@ class LogHubScreen extends StatelessWidget {
 
             Row(
               children: [
-                LogEntryCard(icon: Icons.water_drop, title: "Blood Glucose", subtitle: "Log BG reading", baseColor: Colors.blue, onTap: () {}),
+                LogEntryCard(icon: Icons.water_drop, title: "Blood Glucose", subtitle: "Log BG reading", baseColor: Colors.blue, onTap: () {
+                  Navigator.pushNamed(context, AppRouteNames.glucose_log);
+                }),
                 const SizedBox(width: 16),
-                LogEntryCard(icon: Icons.restaurant, title: "Carbs & Meals", subtitle: "Track food intake", baseColor: Colors.orange, onTap: () {}),
+                LogEntryCard(icon: Icons.restaurant, title: "Carbs & Meals", subtitle: "Track food intake", baseColor: Colors.orange, onTap: () {
+                  Navigator.pushNamed(context, AppRouteNames.carbs_log);
+                }),
               ],
             ),
             const SizedBox(height: 16),
             Row(
               children: [
-                LogEntryCard(icon: Icons.medication, title: "Insulin", subtitle: "Log insulin doses", baseColor: Colors.purple, onTap: () {}),
+                LogEntryCard(icon: Icons.medication, title: "Insulin", subtitle: "Log insulin doses", baseColor: Colors.purple, onTap: () {
+                  Navigator.pushNamed(context, AppRouteNames.insulin_log);
+                }),
                 const SizedBox(width: 16),
                 LogEntryCard(icon: Icons.show_chart, title: "Activity", subtitle: "Track exercise", baseColor: Colors.green, onTap: () {}),
               ],

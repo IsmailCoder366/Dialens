@@ -21,4 +21,7 @@ class AppRouteNames {
   static const String support = '/support feedback';
   static const String log_hub = '/log hub';
   static const String new_entry = '/new entry';
+  static const String glucose_log = '/glucose log';
+  static const String carbs_log = '/carbs log';
+  static const String insulin_log = '/insulin log';
 }
